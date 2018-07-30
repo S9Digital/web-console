@@ -1,8 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import Hotel from "./Hotel";
 
 const Wrapper = styled.div`
+  width: 100%;
+  height: 100% - 200px;
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Content = styled.div`
   width: 100%;
   height: 100%;
   flex: 1;
@@ -10,25 +20,27 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
 `;
-
 const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
   margin: 10px;
 `;
 const MetricsContainer = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   width: 33%;
   height: 40%;
+  margin: 10px;
 `;
 const TileContainer = styled.div`
   flex: 1;
@@ -45,6 +57,7 @@ const TileText = styled.p`
   font-size: 26px;
   color: black;
 `;
+const BoldText = styled.p`font-size: 20px; color: black: font-weight: bold;`;
 class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -53,53 +66,51 @@ class Landing extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Container>
-          <MetricsContainer>
-            <p>Hotel: {this.props.hotel}</p>
-            <p>Address: {this.props.address}</p>
-          </MetricsContainer>
+        <Content>
+          <Container>
+            <Hotel />
+            <MetricsContainer>
+              <BoldText>Current Metrics | Analytics</BoldText>
+              <ul>
+                <li>Rooms Occupied: {this.props.currentRoomsOccupied}</li>
+                <li>Lights On: {this.props.currentLightsOn}</li>
+                <li>Alarms Set: {this.props.currentAlarmsSet}</li>
+                <li>Most Used Alarm: {this.props.currentAlarmMostUsed}</li>
+                <li>Most Used Light: {this.props.currentLightMostUsed}</li>
+              </ul>
+            </MetricsContainer>
 
-          <MetricsContainer>
-            <p>Current Metrics | Analytics</p>
-            <ul>
-              <li>Rooms Occupied: {this.props.currentRoomsOccupied}</li>
-              <li>Lights On: {this.props.currentLightsOn}</li>
-              <li>Alarms Set: {this.props.currentAlarmsSet}</li>
-              <li>Most Used Alarm: {this.props.currentAlarmMostUsed}</li>
-              <li>Most Used Light: {this.props.currentLightMostUsed}</li>
-            </ul>
-          </MetricsContainer>
-
-          <MetricsContainer>
-            <p>Weekly Metrics | Analytics</p>
-            <ul>
-              <li>Rooms Occupied: {this.props.weeklyRoomsOccupied}</li>
-              <li>Lights On: {this.props.weeklyLightsOn}</li>
-              <li>Alarms Set: {this.props.weeklyAlarmsSet}</li>
-              <li>Most Used Alarm: {this.props.weeklyAlarmMostUsed}</li>
-              <li>Most Used Light: {this.props.weeklyLightMostUsed}</li>
-            </ul>
-          </MetricsContainer>
-        </Container>
-        <Container>Alerts</Container>
-        <Container>
-          <TileContainer>
-            <TileText>Room List</TileText>
-          </TileContainer>
-          <TileContainer>
-            <TileText>Default Settings</TileText>
-          </TileContainer>
-          <TileContainer>
-            <TileText>Profile | Admin</TileText>
-          </TileContainer>
-        </Container>
+            <MetricsContainer>
+              <BoldText>Weekly Metrics | Analytics</BoldText>
+              <ul>
+                <li>Rooms Occupied: {this.props.weeklyRoomsOccupied}</li>
+                <li>Lights On: {this.props.weeklyLightsOn}</li>
+                <li>Alarms Set: {this.props.weeklyAlarmsSet}</li>
+                <li>Most Used Alarm: {this.props.weeklyAlarmMostUsed}</li>
+                <li>Most Used Light: {this.props.weeklyLightMostUsed}</li>
+              </ul>
+            </MetricsContainer>
+          </Container>
+          <Container>Alerts</Container>
+          <Container>
+            <TileContainer>
+              <TileText>Room List</TileText>
+            </TileContainer>
+            <TileContainer>
+              <TileText>Default Settings</TileText>
+            </TileContainer>
+            <TileContainer>
+              <TileText>Profile | Admin</TileText>
+            </TileContainer>
+          </Container>
+          <BoldText>Questions or Need Help?</BoldText>
+          <p>Contact us at support@arioliving.com</p>
+        </Content>
       </Wrapper>
     );
   }
 }
 const mapStateToProps = (state, props) => ({
-  hotel: state.hotel,
-  address: state.address,
   currentRoomsOccupied: state.currentRoomsOccupied,
   currentLightsOn: state.currentLightsOn,
   currentAlarmsSet: state.currentAlarmsSet,
