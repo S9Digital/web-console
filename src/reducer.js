@@ -20,6 +20,18 @@ const DEFAULT_STATE = {
   timerSound: false,
   modal: null,
   user: "Joe Smith",
+  hotel: "Hilton",
+  address: "123 West Street Seattle, WA 98123",
+  currentRoomsOccupied: 15,
+  currentLightsOn: 12,
+  currentAlarmsSet: 5,
+  currentAlarmMostUsed: "Music ABC",
+  currentLightMostUsed: "10",
+  weeklyRoomsOccupied: 68,
+  weeklyLightsOn: 50,
+  weeklyAlarmsSet: 30,
+  weeklyAlarmMostUsed: "Music ABC",
+  weeklyLightMostUsed: "8",
   userActions: []
 };
 
