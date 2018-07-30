@@ -19,6 +19,7 @@ const DEFAULT_STATE = {
   timerLights: false,
   timerSound: false,
   modal: null,
+  user: "Joe Smith",
   userActions: []
 };
 
