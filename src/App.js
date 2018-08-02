@@ -5,6 +5,7 @@ import styled from "styled-components";
 import store from "./store";
 import Landing from "./components/Landing";
 import Header from "./components/Header";
+import RoomList from "./components/RoomList";
 
 const Wrapper = styled.div`width: 100% height: 100%; `;
 
@@ -14,7 +15,7 @@ class App extends Component {
       <Provider store={store}>
         <Wrapper>
           <Header />
-          <Landing />
+          <RoomList />
         </Wrapper>
       </Provider>
     );
