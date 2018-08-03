@@ -8,7 +8,7 @@ const MetricsContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  width: 33%;
+  width: 200px;
   height: 40%;
   margin: 10px;
 `;

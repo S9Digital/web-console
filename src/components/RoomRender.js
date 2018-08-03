@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import Hotel from "./Hotel";
-import RoomRender from "./RoomRender";
+import CheckBox from "./CheckBox";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,7 +11,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../assets/mountain_background.jpg");
 `;
 const Container = styled.div`
   display: flex;
@@ -83,6 +81,7 @@ const On = styled.div`
   with: 20px;
   height: 20px;
   margin: 10px;
+  box-shadow: 2px 2px rgba(14, 14, 14, 0.8);
   border-radius: 25px;
   background-color: green;
   jusify-content: center;
@@ -95,6 +94,7 @@ const Off = styled.div`
   with: 20px;
   height: 20px;
   margin: 10px;
+  box-shadow: 2px 2px rgba(14, 14, 14, 0.7);
   flex-direction: row;
   border-radius: 25px;
   background-color: red;
@@ -105,91 +105,65 @@ const Off = styled.div`
 const AlarmContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   flex-wrap: nowrap;
   width: 150px;
 `;
-const CheckBox = styled.div`
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-`;
-class RoomList extends React.Component {
+
+class RoomRender extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  //   renderBulbs(bulb) {
-  //     return (
-  //       <div>
-  //         {bulb.error ? (
-  //           <BulbItem key={bulb.error}>
-  //             <Bulb>{bulb.error ? bulb.Id : null}</Bulb>
-  //           </BulbItem>
-  //         ) : null}
-  //       </div>
-  //     );
-  //   }
-
-  //   renderRoom(item) {
-  //     return (
-  //       <Row key={item.Id}>
-  //         <RowItem>{item.number}</RowItem>
-  //         <RowItem>{item.Id}</RowItem>
-  //         <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
-  //         <RowItem>
-  //           <AlarmContainer>
-  //             {item.wakeTime} | {item.sleepTime}
-  //           </AlarmContainer>
-  //         </RowItem>
-  //         <RowItem>{item.alarm}</RowItem>
-  //         <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
-  //         <div>
-  //           {item.schedule ? (
-  //             <On>
-  //               <p style={{ margin: 5 }}>On</p>
-  //             </On>
-  //           ) : (
-  //             <Off>
-  //               <p style={{ margin: 5 }}>Off</p>
-  //             </Off>
-  //           )}
-  //         </div>
-  //         <CheckBox>x</CheckBox>
-  //       </Row>
-  //     );
-  //   }
+  renderBulbs(bulb) {
+    return (
+      <div>
+        {bulb.error ? (
+          <BulbItem key={bulb.error}>
+            <Bulb>{bulb.error ? bulb.Id : null}</Bulb>
+          </BulbItem>
+        ) : null}
+      </div>
+    );
+  }
 
   render() {
+    const item = this.props.room;
     return (
-      <Wrapper>
-        <Row>
-          <Container>
-            <Hotel />
-          </Container>
-          <Container>
-            <TitleText>Room List</TitleText>
-          </Container>
-        </Row>
-        <ListContainer>
-          {this.props.rooms.map(room => (
-            <RoomRender room={room} />
-          ))}
-        </ListContainer>
-      </Wrapper>
+      <Row key={item.Id}>
+        <RowItem>{item.number}</RowItem>
+        <RowItem>{item.Id}</RowItem>
+        <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
+        <RowItem>
+          <AlarmContainer>
+            {item.wakeTime ? item.wakeTime : "Off"} |{" "}
+            {item.sleepTime ? item.sleepTime : "Off"}
+          </AlarmContainer>
+        </RowItem>
+        <RowItem>{item.alarm ? item.alarm : "Off"}</RowItem>
+        <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
+        <div>
+          {item.schedule ? (
+            <On>
+              <p style={{ margin: 5 }}>On</p>
+            </On>
+          ) : (
+            <Off>
+              <p style={{ margin: 5 }}>Off</p>
+            </Off>
+          )}
+        </div>
+        <CheckBox />
+      </Row>
     );
   }
 }
-const mapStateToProps = (state, props) => ({
-  rooms: state.rooms
-});
+const mapStateToProps = (state, props) => ({});
 const mapDispatchToProps = dispatch => ({});
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RoomList);
+)(RoomRender);

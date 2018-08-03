@@ -5,7 +5,7 @@ import Hotel from "./Hotel";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100% - 200px;
+  height: 100vh - 200px;
   flex: 1;
   flex-direction: column;
   display: flex;

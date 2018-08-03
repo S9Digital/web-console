@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
-import RoomRender from "./RoomRender";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,7 +11,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../assets/mountain_background.jpg");
 `;
 const Container = styled.div`
   display: flex;
@@ -117,52 +115,52 @@ const CheckBox = styled.div`
   justify-content: center;
   margin: 10px;
 `;
-class RoomList extends React.Component {
+class Room extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  //   renderBulbs(bulb) {
-  //     return (
-  //       <div>
-  //         {bulb.error ? (
-  //           <BulbItem key={bulb.error}>
-  //             <Bulb>{bulb.error ? bulb.Id : null}</Bulb>
-  //           </BulbItem>
-  //         ) : null}
-  //       </div>
-  //     );
-  //   }
+  renderBulbs(bulb) {
+    return (
+      <div>
+        {bulb.error ? (
+          <BulbItem key={bulb.error}>
+            <Bulb>{bulb.error ? bulb.Id : null}</Bulb>
+          </BulbItem>
+        ) : null}
+      </div>
+    );
+  }
 
-  //   renderRoom(item) {
-  //     return (
-  //       <Row key={item.Id}>
-  //         <RowItem>{item.number}</RowItem>
-  //         <RowItem>{item.Id}</RowItem>
-  //         <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
-  //         <RowItem>
-  //           <AlarmContainer>
-  //             {item.wakeTime} | {item.sleepTime}
-  //           </AlarmContainer>
-  //         </RowItem>
-  //         <RowItem>{item.alarm}</RowItem>
-  //         <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
-  //         <div>
-  //           {item.schedule ? (
-  //             <On>
-  //               <p style={{ margin: 5 }}>On</p>
-  //             </On>
-  //           ) : (
-  //             <Off>
-  //               <p style={{ margin: 5 }}>Off</p>
-  //             </Off>
-  //           )}
-  //         </div>
-  //         <CheckBox>x</CheckBox>
-  //       </Row>
-  //     );
-  //   }
+  renderRoom(item) {
+    return (
+      <Row key={item.Id}>
+        <RowItem>{item.number}</RowItem>
+        <RowItem>{item.Id}</RowItem>
+        <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
+        <RowItem>
+          <AlarmContainer>
+            {item.wakeTime} | {item.sleepTime}
+          </AlarmContainer>
+        </RowItem>
+        <RowItem>{item.alarm}</RowItem>
+        <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
+        <div>
+          {item.schedule ? (
+            <On>
+              <p style={{ margin: 5 }}>On</p>
+            </On>
+          ) : (
+            <Off>
+              <p style={{ margin: 5 }}>Off</p>
+            </Off>
+          )}
+        </div>
+        <CheckBox>x</CheckBox>
+      </Row>
+    );
+  }
 
   render() {
     return (
@@ -176,9 +174,7 @@ class RoomList extends React.Component {
           </Container>
         </Row>
         <ListContainer>
-          {this.props.rooms.map(room => (
-            <RoomRender room={room} />
-          ))}
+          {this.props.rooms.map(room => this.renderRoom(room))}
         </ListContainer>
       </Wrapper>
     );
@@ -192,4 +188,4 @@ const mapDispatchToProps = dispatch => ({});
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RoomList);
+)(Room);

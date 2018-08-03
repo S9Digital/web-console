@@ -73,9 +73,9 @@ const DEFAULT_STATE = {
     {
       number: "102",
       Id: "456AB",
-      sleepTime: "10:30pm",
-      wakeTime: "11:00am",
-      alarm: "Music CD",
+      sleepTime: null,
+      wakeTime: null,
+      alarm: null,
       bulbs: [
         { Id: 1, error: false },
         { Id: 2, error: true },
@@ -103,7 +103,7 @@ const DEFAULT_STATE = {
         { Id: 24, error: true },
         { Id: 25, error: true }
       ],
-      schedule: false,
+      schedule: true,
       tabletOn: false
     },
     {
@@ -139,7 +139,7 @@ const DEFAULT_STATE = {
         { Id: 24, error: true },
         { Id: 25, error: true }
       ],
-      schedule: false,
+      schedule: true,
       tabletOn: false
     }
   ]
