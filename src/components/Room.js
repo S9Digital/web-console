@@ -120,62 +120,19 @@ class Room extends React.Component {
     super(props);
     this.state = {};
   }
-
-  renderBulbs(bulb) {
-    return (
-      <div>
-        {bulb.error ? (
-          <BulbItem key={bulb.error}>
-            <Bulb>{bulb.error ? bulb.Id : null}</Bulb>
-          </BulbItem>
-        ) : null}
-      </div>
-    );
-  }
-
-  renderRoom(item) {
-    return (
-      <Row key={item.Id}>
-        <RowItem>{item.number}</RowItem>
-        <RowItem>{item.Id}</RowItem>
-        <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
-        <RowItem>
-          <AlarmContainer>
-            {item.wakeTime} | {item.sleepTime}
-          </AlarmContainer>
-        </RowItem>
-        <RowItem>{item.alarm}</RowItem>
-        <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
-        <div>
-          {item.schedule ? (
-            <On>
-              <p style={{ margin: 5 }}>On</p>
-            </On>
-          ) : (
-            <Off>
-              <p style={{ margin: 5 }}>Off</p>
-            </Off>
-          )}
-        </div>
-        <CheckBox>x</CheckBox>
-      </Row>
-    );
-  }
-
   render() {
     return (
       <Wrapper>
         <Row>
           <Container>
-            <Hotel />
+            <TitleText>
+              Room: {} | Tablet ID: {}
+            </TitleText>
           </Container>
           <Container>
-            <TitleText>Room List</TitleText>
+            <Hotel />
           </Container>
         </Row>
-        <ListContainer>
-          {this.props.rooms.map(room => this.renderRoom(room))}
-        </ListContainer>
       </Wrapper>
     );
   }

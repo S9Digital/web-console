@@ -36,10 +36,10 @@ const MetricsContainer = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
-  width: 33%;
-  height: 40%;
+  width: 18%;
+  height: 200px;
   margin: 10px;
 `;
 const TileContainer = styled.div`
@@ -91,7 +91,9 @@ class Landing extends React.Component {
               </ul>
             </MetricsContainer>
           </Container>
-          <Container>Alerts</Container>
+          <Container>
+            {this.props.alerts ? "Alerts: " + this.props.alerts : null}
+          </Container>
           <Container>
             <TileContainer>
               <TileText>Room List</TileText>
@@ -120,7 +122,8 @@ const mapStateToProps = (state, props) => ({
   weeklyLightsOn: state.weeklyLightsOn,
   weeklyAlarmsSet: state.weeklyAlarmsSet,
   weeklyAlarmMostUsed: state.weeklyAlarmMostUsed,
-  weeklyLightMostUsed: state.weeklyLightMostUsed
+  weeklyLightMostUsed: state.weeklyLightMostUsed,
+  alerts: state.alerts
 });
 const mapDispatchToProps = dispatch => ({});
 

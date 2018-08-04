@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 const MetricsContainer = styled.div`
   flex: 1;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  width: 200px;
-  height: 40%;
+  width: 18%;
+  height: 200px;
   margin: 10px;
 `;
 

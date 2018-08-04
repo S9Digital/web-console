@@ -23,7 +23,8 @@ const Row = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  border: 1px solid Black;
+  border: solid black;
+  border-width: 0px 1px 1px 1px;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -37,19 +38,6 @@ const RowItem = styled.div`
   height: 50px;
   padding-right: 5px;
   padding-left: 5px;
-`;
-const ListContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  width: 80%;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border: 1px solid black;
-`;
-const TitleText = styled.p`
-  font-size: 26px;
-  color: black;
 `;
 const BulbBox = styled.div`
   display: flex;
@@ -122,7 +110,7 @@ class RoomRender extends React.Component {
       <div>
         {bulb.error ? (
           <BulbItem key={bulb.error}>
-            <Bulb>{bulb.error ? bulb.Id : null}</Bulb>
+            <Bulb>{bulb.error ? bulb.id : null}</Bulb>
           </BulbItem>
         ) : null}
       </div>
@@ -132,9 +120,9 @@ class RoomRender extends React.Component {
   render() {
     const item = this.props.room;
     return (
-      <Row key={item.Id}>
+      <Row key={item.id}>
         <RowItem>{item.number}</RowItem>
-        <RowItem>{item.Id}</RowItem>
+        <RowItem>{item.id}</RowItem>
         <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
         <RowItem>
           <AlarmContainer>
@@ -143,8 +131,7 @@ class RoomRender extends React.Component {
           </AlarmContainer>
         </RowItem>
         <RowItem>{item.alarm ? item.alarm : "Off"}</RowItem>
-        <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
-        <div>
+        <RowItem>
           {item.schedule ? (
             <On>
               <p style={{ margin: 5 }}>On</p>
@@ -154,8 +141,12 @@ class RoomRender extends React.Component {
               <p style={{ margin: 5 }}>Off</p>
             </Off>
           )}
-        </div>
-        <CheckBox />
+        </RowItem>
+        <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
+
+        <RowItem>
+          <CheckBox />
+        </RowItem>
       </Row>
     );
   }

@@ -12,7 +12,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../assets/mountain_background.jpg");
 `;
 const Container = styled.div`
   display: flex;
@@ -25,12 +24,25 @@ const Row = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  border: 1px solid Black;
+  border: solid Black;
+  border-width: 0px 1px 1px 1px;
   justify-content: center;
   align-items: center;
   width: 100%;
 `;
-const RowItem = styled.div`
+const ListContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 80%;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+const TitleText = styled.p`
+  font-size: 26px;
+  color: black;
+`;
+const ListHeader = styled.li`
   display: flex;
   flex: 1;
   align-items: center;
@@ -40,129 +52,11 @@ const RowItem = styled.div`
   padding-right: 5px;
   padding-left: 5px;
 `;
-const ListContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  width: 80%;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border: 1px solid black;
-`;
-const TitleText = styled.p`
-  font-size: 26px;
-  color: black;
-`;
-const BulbBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 110px;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: #38352a;
-`;
-const BulbItem = styled.div`
-  width: 20px;
-  height: 20px;
-  margin: 1px;
-  border-radius: 25px;
-  background-color: #ffe972;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Bulb = styled.p`
-  font-size: 8px;
-  color: black;
-`;
-
-const On = styled.div`
-  display: flex;
-  flex: 1;
-  with: 20px;
-  height: 20px;
-  margin: 10px;
-  border-radius: 25px;
-  background-color: green;
-  jusify-content: center;
-  align-items: center;
-`;
-
-const Off = styled.div`
-  display: flex;
-  flex: 1;
-  with: 20px;
-  height: 20px;
-  margin: 10px;
-  flex-direction: row;
-  border-radius: 25px;
-  background-color: red;
-  jusify-content: center;
-  align-items: center;
-`;
-
-const AlarmContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: 150px;
-`;
-const CheckBox = styled.div`
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-`;
 class RoomList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
-  //   renderBulbs(bulb) {
-  //     return (
-  //       <div>
-  //         {bulb.error ? (
-  //           <BulbItem key={bulb.error}>
-  //             <Bulb>{bulb.error ? bulb.Id : null}</Bulb>
-  //           </BulbItem>
-  //         ) : null}
-  //       </div>
-  //     );
-  //   }
-
-  //   renderRoom(item) {
-  //     return (
-  //       <Row key={item.Id}>
-  //         <RowItem>{item.number}</RowItem>
-  //         <RowItem>{item.Id}</RowItem>
-  //         <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
-  //         <RowItem>
-  //           <AlarmContainer>
-  //             {item.wakeTime} | {item.sleepTime}
-  //           </AlarmContainer>
-  //         </RowItem>
-  //         <RowItem>{item.alarm}</RowItem>
-  //         <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
-  //         <div>
-  //           {item.schedule ? (
-  //             <On>
-  //               <p style={{ margin: 5 }}>On</p>
-  //             </On>
-  //           ) : (
-  //             <Off>
-  //               <p style={{ margin: 5 }}>Off</p>
-  //             </Off>
-  //           )}
-  //         </div>
-  //         <CheckBox>x</CheckBox>
-  //       </Row>
-  //     );
-  //   }
 
   render() {
     return (
@@ -176,6 +70,18 @@ class RoomList extends React.Component {
           </Container>
         </Row>
         <ListContainer>
+          <Row>
+            <ListHeader>Room Number</ListHeader>
+            <ListHeader>Tablet ID</ListHeader>
+            <ListHeader>Tablet Status</ListHeader>
+            <ListHeader style={{ minWidth: 170 }}>
+              Wake Time | SleepTime
+            </ListHeader>
+            <ListHeader>Alarm</ListHeader>
+            <ListHeader>Schedule?</ListHeader>
+            <ListHeader>Light Errors</ListHeader>
+            <ListHeader>Set to Default?</ListHeader>
+          </Row>
           {this.props.rooms.map(room => (
             <RoomRender room={room} />
           ))}
