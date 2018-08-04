@@ -58,7 +58,7 @@ const TileText = styled.p`
   color: black;
 `;
 const BoldText = styled.p`font-size: 20px; color: black: font-weight: bold;`;
-class Landing extends React.Component {
+class Property extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -130,4 +130,4 @@ const mapDispatchToProps = dispatch => ({});
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Landing);
+)(Property);

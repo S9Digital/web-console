@@ -2,6 +2,11 @@ const DEFAULT_STATE = {
   alerts: null,
   wakeTime: null,
   sleepTime: null,
+  minCCT: null,
+  maxCCT: null,
+  minLevel: null,
+  maxLevel: null,
+  settingsResetTime: null,
   alarm: false,
   alarmTime: null,
   alarmDuration: 60,
@@ -34,6 +39,12 @@ const DEFAULT_STATE = {
   weeklyAlarmMostUsed: "Music ABC",
   weeklyLightMostUsed: "8",
   userActions: [],
+  properties: [
+    { id: "123", name: "property 1", location: "place" },
+    { id: "456", name: "property 2", location: "place" },
+    { id: "789", name: "property 3", location: "place" }
+  ],
+  property: null,
   rooms: [
     {
       id: "123AB",
@@ -69,14 +80,24 @@ const DEFAULT_STATE = {
         { id: 25, error: true }
       ],
       schedule: false,
-      tabletOn: false
+      tabletOn: false,
+      hasIssue: false
     },
     {
       number: "102",
       id: "456AB",
       sleepTime: null,
       wakeTime: null,
-      alarm: null,
+      alarm: { time: null, soundId: null, duration: null },
+      sleepSound: { isActive: null, soundId: null, duration: null },
+      tablet: { lastHeard: null },
+      sensors: {
+        temp: null,
+        humididty: null,
+        lightLevel: null,
+        lastMotionTime: null,
+        lastMotionMagnititude: null
+      },
       bulbs: [
         { id: 1, error: false },
         { id: 2, error: true },
