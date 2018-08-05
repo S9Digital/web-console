@@ -59,8 +59,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "username",
-      password: "password",
+      username: null,
+      password: null,
       propertyId: ""
     };
   }
@@ -69,6 +69,12 @@ class Home extends Component {
   }
   changeProperty(e) {
     this.setState({ propertyId: e.target.value });
+  }
+  changeUsername(e) {
+    this.setState({ username: e.target.value });
+  }
+  changePassword(e) {
+    this.setState({ password: e.target.value });
   }
   renderPropertySelect(property) {
     return <OptionInput value={property.id}>{property.name}</OptionInput>;
@@ -91,12 +97,14 @@ class Home extends Component {
               )}
             </select>
             <TextInput
+              placeholder="username"
               value={this.state.username}
-              onChange={username => this.setState({ username })}
+              onChange={e => this.changeUsername(e)}
             />
             <TextInput
+              placeholder="password"
               value={this.state.password}
-              onChange={password => this.setState({ password })}
+              onChange={e => this.changePassword(e)}
             />
             <TextInput
               type="submit"
