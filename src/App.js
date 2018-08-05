@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import styled from "styled-components";
 import store from "./store";
-import { BrowserRouter as Link, Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Property from "./components/Property";
 import RoomList from "./components/RoomList";
@@ -18,8 +18,8 @@ class App extends Component {
           <Wrapper>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/property" component={Property} />
-              {/* <Route path="/property/:propertyId/rooms" component={RoomList} /> */}
+              <Route path="/property/:propertyId" component={Property} />
+              <Route path="/property/:propertyId/rooms" component={RoomList} />
               {/* <Route
                 path="/property/:propertyId/rooms/:roomId"
                 component={Room}

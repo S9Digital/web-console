@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { BrowserRouter as Link, Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -48,17 +54,24 @@ const OptionInput = styled.option`
   justify-content: center;
   align-items: center;
 `;
+
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "username",
       password: "password",
-      propertyId: null
+      propertyId: ""
     };
   }
+  handleClick() {
+    this.props.history.push(`/property/:${this.state.propertyId}`);
+  }
+  changeProperty(e) {
+    this.setState({ propertyId: e.target.value });
+  }
   renderPropertySelect(property) {
-    <OptionInput value={property.id}>{property.name}</OptionInput>;
+    return <OptionInput value={property.id}>{property.name}</OptionInput>;
   }
   render() {
     return (
@@ -68,7 +81,11 @@ class Home extends Component {
         <LoginContainer>
           <Login>
             <p>Property</p>
-            <select name="properties">
+            <select
+              name="properties"
+              value={this.state.propertyId}
+              onChange={e => this.changeProperty(e)}
+            >
               {this.props.properties.map(property =>
                 this.renderPropertySelect(property)
               )}
@@ -81,9 +98,11 @@ class Home extends Component {
               value={this.state.password}
               onChange={password => this.setState({ password })}
             />
-            {/* <Link to={`/properties/${propertyId}`}> */}
-            <TextInput type="submit" value="submit" />
-            {/* </Link> */}
+            <TextInput
+              type="submit"
+              value="submit"
+              onSubmit={() => this.handleClick()}
+            />
           </Login>
         </LoginContainer>
       </Wrapper>
@@ -95,7 +114,9 @@ const mapStateToProps = (state, props) => ({
 });
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Home)
+);
