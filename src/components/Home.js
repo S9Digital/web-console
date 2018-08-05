@@ -64,8 +64,9 @@ class Home extends Component {
       propertyId: ""
     };
   }
-  handleClick() {
-    this.props.history.push(`/property/:${this.state.propertyId}`);
+  handleClick(e) {
+    e.preventDefault();
+    this.props.history.push(`/property/${this.state.propertyId}`);
   }
   changeProperty(e) {
     this.setState({ propertyId: e.target.value });
@@ -80,15 +81,16 @@ class Home extends Component {
     return <OptionInput value={property.id}>{property.name}</OptionInput>;
   }
   render() {
+    console.log(JSON.stringify(this.state.propertyId));
     return (
       <Wrapper>
         <Logo>LOGO</Logo>
         <p>Welcome to Ario Living Hopsitality Web Console</p>
         <LoginContainer>
-          <Login>
+          <Login onSubmit={e => this.handleClick(e)}>
             <p>Property</p>
             <select
-              name="properties"
+              name="property"
               value={this.state.propertyId}
               onChange={e => this.changeProperty(e)}
             >
@@ -106,11 +108,7 @@ class Home extends Component {
               value={this.state.password}
               onChange={e => this.changePassword(e)}
             />
-            <TextInput
-              type="submit"
-              value="submit"
-              onSubmit={() => this.handleClick()}
-            />
+            <TextInput type="submit" value="submit" />
           </Login>
         </LoginContainer>
       </Wrapper>

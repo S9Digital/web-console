@@ -19,7 +19,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/property/:propertyId" component={Property} />
-              <Route path="/property/:propertyId/rooms" component={RoomList} />
+              {/* <Route path="/property/:propertyId/rooms" component={RoomList} /> */}
               {/* <Route
                 path="/property/:propertyId/rooms/:roomId"
                 component={Room}
