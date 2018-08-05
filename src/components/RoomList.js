@@ -83,7 +83,7 @@ class RoomList extends React.Component {
             <ListHeader>Set to Default?</ListHeader>
           </Row>
           {this.props.rooms.map(room => (
-            <RoomRender room={room} />
+            <RoomRender room={room} key={room.id} />
           ))}
         </ListContainer>
       </Wrapper>

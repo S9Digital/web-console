@@ -129,7 +129,7 @@ const DEFAULT_STATE = {
     },
     {
       number: "102",
-      id: "456AB",
+      id: "456BC",
       sleepTime: "10:30pm",
       wakeTime: "11:00am",
       alarm: "Music CD",
@@ -165,7 +165,7 @@ const DEFAULT_STATE = {
     },
     {
       number: "102",
-      id: "456AB",
+      id: "789AB",
       sleepTime: "10:30pm",
       wakeTime: "11:00am",
       alarm: "Music CD",
@@ -201,7 +201,7 @@ const DEFAULT_STATE = {
     },
     {
       number: "102",
-      id: "456AB",
+      id: "789BC",
       sleepTime: "10:30pm",
       wakeTime: "11:00am",
       alarm: "Music CD",
@@ -236,7 +236,7 @@ const DEFAULT_STATE = {
       tabletOn: false
     },
     {
-      id: "123AB",
+      id: "123BC",
       number: "101",
       sleepTime: "9:30pm",
       wakeTime: "6:00am",

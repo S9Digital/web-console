@@ -107,9 +107,9 @@ class RoomRender extends React.Component {
 
   renderBulbs(bulb) {
     return (
-      <div>
+      <div key={bulb.id}>
         {bulb.error ? (
-          <BulbItem key={bulb.error}>
+          <BulbItem>
             <Bulb>{bulb.error ? bulb.id : null}</Bulb>
           </BulbItem>
         ) : null}
