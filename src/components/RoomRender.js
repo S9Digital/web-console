@@ -130,7 +130,7 @@ class RoomRender extends React.Component {
             {item.sleepTime ? item.sleepTime : "Off"}
           </AlarmContainer>
         </RowItem>
-        <RowItem>{item.alarm ? item.alarm : "Off"}</RowItem>
+        {/* <RowItem>{item.alarm ? item.alarm : "Off"}</RowItem> */}
         <RowItem>
           {item.schedule ? (
             <On>

@@ -61,7 +61,7 @@ class Home extends Component {
     this.state = {
       username: null,
       password: null,
-      propertyId: ""
+      propertyId: "123"
     };
   }
   handleClick(e) {
@@ -81,7 +81,6 @@ class Home extends Component {
     return <OptionInput value={property.id}>{property.name}</OptionInput>;
   }
   render() {
-    console.log(JSON.stringify(this.state.propertyId));
     return (
       <Wrapper>
         <Logo>LOGO</Logo>
@@ -90,7 +89,7 @@ class Home extends Component {
           <Login onSubmit={e => this.handleClick(e)}>
             <p>Property</p>
             <select
-              name="property"
+              name="/property"
               value={this.state.propertyId}
               onChange={e => this.changeProperty(e)}
             >

@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
 const MetricsContainer = styled.div`
   flex: 1;
   display: flex;
@@ -39,23 +45,27 @@ class Hotel extends React.Component {
       <MetricsContainer>
         <HotelContainer>
           <BoldText>Hotel:</BoldText>
-          <HotelInfo>{this.props.hotel}</HotelInfo>
+          <HotelInfo>{this.props.hotel[0].name}</HotelInfo>
         </HotelContainer>
         <HotelContainer>
           <BoldText>Address:</BoldText>
-          <HotelInfo>{this.props.address}</HotelInfo>
+          <HotelInfo>{this.props.hotel[0].location}</HotelInfo>
         </HotelContainer>
       </MetricsContainer>
     );
   }
 }
 const mapStateToProps = (state, props) => ({
-  hotel: state.hotel,
+  hotel: state.properties.filter(
+    property => property.id === props.match.params.propertyId
+  ),
   address: state.address
 });
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Hotel);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Hotel)
+);

@@ -2,6 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -64,6 +71,7 @@ class Property extends React.Component {
     this.state = {};
   }
   render() {
+    console.log(this.props.history.location);
     return (
       <Wrapper>
         <Content>
@@ -96,7 +104,11 @@ class Property extends React.Component {
           </Container>
           <Container>
             <TileContainer>
-              <TileText>Room List</TileText>
+              <TileText>
+                <Link to={`${this.props.history.location.pathname}/rooms`}>
+                  Room List
+                </Link>
+              </TileText>
             </TileContainer>
             <TileContainer>
               <TileText>Default Settings</TileText>
@@ -127,7 +139,9 @@ const mapStateToProps = (state, props) => ({
 });
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Property);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Property)
+);
