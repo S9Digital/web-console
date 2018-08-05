@@ -18,13 +18,12 @@ class App extends Component {
           <Wrapper>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/property/:propertyId/rooms" component={RoomList} />
-              <Route path="/property/:propertyId" component={Property} />
-
               <Route
                 path="/property/:propertyId/rooms/:roomId"
                 component={Room}
               />
+              <Route path="/property/:propertyId/rooms" component={RoomList} />
+              <Route path="/property/:propertyId" component={Property} />
             </Switch>
           </Wrapper>
         </Router>

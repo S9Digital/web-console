@@ -2,6 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import CheckBox from "./CheckBox";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -104,7 +111,10 @@ class RoomRender extends React.Component {
     super(props);
     this.state = {};
   }
-
+  handleClick(e, roomId) {
+    e.preventDefault();
+    this.props.history.push(`${this.props.location.pathname}/${roomId}`);
+  }
   renderBulbs(bulb) {
     return (
       <div key={bulb.id}>
@@ -116,12 +126,15 @@ class RoomRender extends React.Component {
       </div>
     );
   }
-
+  // <Link to={`${this.props.history.location.pathname}/${item.id}`}>
   render() {
+    console.log(this.props.location.pathname);
     const item = this.props.room;
     return (
       <Row key={item.id}>
-        <RowItem>{item.number}</RowItem>
+        <RowItem onClick={e => this.handleClick(e, item.id)}>
+          <a>{item.number}</a>
+        </RowItem>
         <RowItem>{item.id}</RowItem>
         <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
         <RowItem>
@@ -154,7 +167,9 @@ class RoomRender extends React.Component {
 const mapStateToProps = (state, props) => ({});
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RoomRender);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(RoomRender)
+);

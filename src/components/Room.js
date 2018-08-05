@@ -2,6 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
+import RoomRender from "./RoomRender";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -121,28 +129,52 @@ class Room extends React.Component {
     this.state = {};
   }
   render() {
+    console.log(this.props.match.params.roomId);
+    console.log(this.props.room);
     return (
       <Wrapper>
         <Row>
           <Container>
             <TitleText>
-              Room: {} | Tablet ID: {}
+              Room: {this.props.room[0].number} | Tablet ID:{" "}
+              {this.props.room[0].id}
             </TitleText>
           </Container>
           <Container>
             <Hotel />
           </Container>
         </Row>
+        <Row>
+          <RowItem>Sleep Time: {this.props.room[0].sleepTime}</RowItem>
+          <RowItem>Wake Time: {this.props.room[0].wakeTime}</RowItem>
+          <RowItem>
+            Schedule Mode On? {this.props.room[0].schedule ? "Yes" : "No"}
+          </RowItem>
+          <RowItem>
+            Tablet On? {this.props.room[0].tabletOn ? "Yes" : "No"}
+          </RowItem>
+          <RowItem>
+            Issues? {this.props.room[0].hasIssue ? "Yes" : "No"}
+          </RowItem>
+        </Row>
       </Wrapper>
     );
   }
 }
 const mapStateToProps = (state, props) => ({
-  rooms: state.rooms
+  room: state.rooms.filter(room => {
+    if (
+      room.propertyId === props.match.params.propertyId &&
+      room.id === props.match.params.roomId
+    )
+      return true;
+  })
 });
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Room);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Room)
+);

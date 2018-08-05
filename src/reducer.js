@@ -46,6 +46,7 @@ const DEFAULT_STATE = {
   property: null,
   rooms: [
     {
+      propertyId: "123",
       id: "123AB",
       number: "101",
       sleepTime: "9:30pm",
@@ -83,6 +84,7 @@ const DEFAULT_STATE = {
       hasIssue: false
     },
     {
+      propertyId: "123",
       number: "102",
       id: "456AB",
       sleepTime: null,
@@ -128,6 +130,7 @@ const DEFAULT_STATE = {
       tabletOn: false
     },
     {
+      propertyId: "123",
       number: "102",
       id: "456BC",
       sleepTime: "10:30pm",
@@ -164,6 +167,7 @@ const DEFAULT_STATE = {
       tabletOn: false
     },
     {
+      propertyId: "123",
       number: "102",
       id: "789AB",
       sleepTime: "10:30pm",
@@ -200,6 +204,7 @@ const DEFAULT_STATE = {
       tabletOn: false
     },
     {
+      propertyId: "123",
       number: "102",
       id: "789BC",
       sleepTime: "10:30pm",
@@ -236,6 +241,7 @@ const DEFAULT_STATE = {
       tabletOn: false
     },
     {
+      propertyId: "123",
       id: "123BC",
       number: "101",
       sleepTime: "9:30pm",
