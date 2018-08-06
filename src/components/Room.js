@@ -10,7 +10,9 @@ import {
   Switch,
   withRouter
 } from "react-router-dom";
+import Datetime from "react-datetime";
 import RoomRender from "./RoomRender";
+import styles from "./timePicker.css";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -41,7 +43,6 @@ const Column = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  border: 1px solid Black;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -56,73 +57,50 @@ const ColumnItem = styled.div`
   padding-right: 20px;
   padding-left: 20px;
 `;
-const ListContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  width: 80%;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border: 1px solid black;
-`;
 const TitleText = styled.p`
   font-size: 26px;
   color: black;
+`;
+const OptionInput = styled.option`
+  width: 200px;
+  height: 50px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const BulbBox = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 110px;
+  width: 300px;
+  height: 300px;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   background-color: #38352a;
 `;
 const BulbItem = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
   margin: 1px;
   border-radius: 25px;
   background-color: #ffe972;
+  flex: 1;
   display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 const Bulb = styled.p`
-  font-size: 8px;
+  font-size: 12px;
   color: black;
-`;
-
-const On = styled.div`
+  cursor: default;
   display: flex;
-  flex: 1;
-  with: 20px;
-  height: 20px;
-  margin: 10px;
-  border-radius: 25px;
-  background-color: green;
-  jusify-content: center;
-  align-items: center;
-`;
-
-const Off = styled.div`
-  display: flex;
-  flex: 1;
-  with: 20px;
-  height: 20px;
-  margin: 10px;
-  flex-direction: row;
-  border-radius: 25px;
-  background-color: red;
-  jusify-content: center;
-  align-items: center;
-`;
-
-const AlarmContainer = styled.div`
-  display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
-  width: 150px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const CheckBox = styled.div`
   width: 20px;
@@ -133,39 +111,122 @@ const CheckBox = styled.div`
   justify-content: center;
   margin: 10px;
 `;
+
 class Room extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      sleepTime: "",
+      wakeTime: "",
+      alarmTime: "",
+      alarmSound: this.props.room[0].alarm.soundId
+    };
+  }
+  changeSound(e) {
+    this.setState({ alarmSound: e.target.value });
+    console.log(this.state.alarmSound);
+  }
+
+  renderBulbs(bulb) {
+    return (
+      <div key={bulb.id}>
+        {bulb.error ? (
+          <BulbItem>
+            <Bulb>{bulb.error ? bulb.id + ")" : null}</Bulb>
+            <Bulb> {bulb.lastHeard ? bulb.lastHeard : null}</Bulb>
+          </BulbItem>
+        ) : null}
+      </div>
+    );
   }
   render() {
-    console.log(this.props.room[0]);
+    console.log(this.state.sleepTime);
     return (
       <Wrapper>
         <Row>
           <Container>
-            <TitleText>
-              Room: {this.props.room[0].number} | Tablet ID:{" "}
-              {this.props.room[0].id}
-            </TitleText>
+            <Column>
+              <TitleText>
+                Room: {this.props.room[0].number} | Tablet ID:{" "}
+                {this.props.room[0].id}
+              </TitleText>
+              <TitleText>
+                Tablet: {this.props.room[0].tablet.on ? "On" : "Off"} | Issues:{" "}
+                {this.props.room[0].hasIssue ? "Yes" : "No"}
+              </TitleText>
+
+              <TitleText>
+                Last Heard:{" "}
+                {this.props.room[0].tablet.lastHeard
+                  ? this.props.room[0].tablet.lastHeard
+                  : "N/A"}
+              </TitleText>
+            </Column>
           </Container>
           <Container>
             <Hotel />
           </Container>
         </Row>
-        <Column>
-          <ColumnItem>Sleep Time: {this.props.room[0].sleepTime}</ColumnItem>
-          <ColumnItem>Wake Time: {this.props.room[0].wakeTime}</ColumnItem>
-          <ColumnItem>
-            Schedule Mode On? {this.props.room[0].schedule ? "Yes" : "No"}
-          </ColumnItem>
-          <ColumnItem>
-            Tablet On? {this.props.room[0].tabletOn ? "Yes" : "No"}
-          </ColumnItem>
-          <ColumnItem>
-            Issues? {this.props.room[0].hasIssue ? "Yes" : "No"}
-          </ColumnItem>
-        </Column>
+        <Row>
+          <Column>
+            <ColumnItem>
+              Sleep Time: {this.props.room[0].sleepTime}
+              <Datetime
+                dateFormat={false}
+                closeOnSelect={true}
+                value={this.state.sleepTime}
+                onChange={moment => this.setState({ sleepTime: moment._d })}
+              />
+            </ColumnItem>
+            <ColumnItem>
+              Wake Time: {this.props.room[0].wakeTime}{" "}
+              <Datetime dateFormat={false} closeOnSelect={true} />
+            </ColumnItem>
+            <ColumnItem>
+              Alarm Time: {this.props.room[0].alarm.time}{" "}
+              <Datetime dateFormat={false} closeOnSelect={true} />
+            </ColumnItem>
+            <ColumnItem>
+              Alarm Sound: {this.props.room[0].alarm.soundId}{" "}
+              <select
+                style={{ marginLeft: 10 }}
+                value={this.state.alarmSound}
+                onChange={e => this.changeSound(e)}
+              >
+                <OptionInput value="Music AB">Music AB</OptionInput>
+                <OptionInput value="Music AB">Music CD</OptionInput>
+                <OptionInput value="Music AB">Music EF</OptionInput>
+                <OptionInput value="Music AB">Music GH</OptionInput>{" "}
+              </select>
+            </ColumnItem>
+            <ColumnItem>
+              Alarm Duration: {this.props.room[0].alarm.duration}s{" "}
+              <select style={{ marginLeft: 10 }}>
+                <OptionInput value="5">5</OptionInput>
+                <OptionInput value="10">10</OptionInput>
+                <OptionInput value="15">15</OptionInput>
+                <OptionInput value="20">20</OptionInput>
+                <OptionInput value="30">30</OptionInput>
+                <OptionInput value="40">40</OptionInput>
+                <OptionInput value="50">50</OptionInput>
+                <OptionInput value="60">60</OptionInput>
+              </select>
+            </ColumnItem>
+            <ColumnItem>
+              Schedule Mode On?{" "}
+              <button style={{ marginLeft: 20 }}>
+                {this.props.room[0].schedule ? "Yes" : "No"}
+              </button>
+            </ColumnItem>
+          </Column>
+          <Column>
+            <BulbBox>
+              {this.props.room[0].bulbs.map(bulb => this.renderBulbs(bulb))}
+            </BulbBox>
+          </Column>
+        </Row>
+        {/* <Link>cancel</Link>
+        <Link>Submit</Link> */}
       </Wrapper>
     );
   }

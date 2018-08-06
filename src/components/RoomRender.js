@@ -126,14 +126,14 @@ class RoomRender extends React.Component {
       </div>
     );
   }
-  // <Link to={`${this.props.history.location.pathname}/${item.id}`}>
   render() {
-    console.log(this.props.location.pathname);
     const item = this.props.room;
     return (
       <Row key={item.id}>
         <RowItem onClick={e => this.handleClick(e, item.id)}>
-          <a>{item.number}</a>
+          <a style={{ color: "blue", textDecoration: "underline" }}>
+            {item.number}
+          </a>
         </RowItem>
         <RowItem>{item.id}</RowItem>
         <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
@@ -143,7 +143,7 @@ class RoomRender extends React.Component {
             {item.sleepTime ? item.sleepTime : "Off"}
           </AlarmContainer>
         </RowItem>
-        {/* <RowItem>{item.alarm ? item.alarm : "Off"}</RowItem> */}
+        <RowItem>{item.alarm.time ? "On" : "Off"}</RowItem>
         <RowItem>
           {item.schedule ? (
             <On>
