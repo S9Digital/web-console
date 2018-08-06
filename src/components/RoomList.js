@@ -91,7 +91,9 @@ class RoomList extends React.Component {
   }
 }
 const mapStateToProps = (state, props) => ({
-  rooms: state.rooms
+  rooms: state.rooms.filter(room => {
+    if (room.propertyId === props.match.params.propertyId) return true;
+  })
 });
 const mapDispatchToProps = dispatch => ({});
 

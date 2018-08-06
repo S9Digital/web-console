@@ -7,7 +7,6 @@ const DEFAULT_STATE = {
   minLevel: null,
   maxLevel: null,
   settingsResetTime: null,
-  alarm: false,
   alarmTime: null,
   alarmDuration: 60,
   alarmSoundId: "default",
@@ -130,8 +129,8 @@ const DEFAULT_STATE = {
       tabletOn: false
     },
     {
-      propertyId: "123",
-      number: "102",
+      propertyId: "456",
+      number: "103",
       id: "456BC",
       sleepTime: "10:30pm",
       wakeTime: "11:00am",
@@ -168,7 +167,7 @@ const DEFAULT_STATE = {
     },
     {
       propertyId: "123",
-      number: "102",
+      number: "104",
       id: "789AB",
       sleepTime: "10:30pm",
       wakeTime: "11:00am",
@@ -205,7 +204,7 @@ const DEFAULT_STATE = {
     },
     {
       propertyId: "123",
-      number: "102",
+      number: "105",
       id: "789BC",
       sleepTime: "10:30pm",
       wakeTime: "11:00am",
@@ -243,7 +242,7 @@ const DEFAULT_STATE = {
     {
       propertyId: "123",
       id: "123BC",
-      number: "101",
+      number: "106",
       sleepTime: "9:30pm",
       wakeTime: "6:00am",
       alarm: "Music AB",

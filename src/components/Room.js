@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
+import moment from "moment";
 import {
   BrowserRouter as Router,
   Link,
@@ -36,15 +37,24 @@ const Row = styled.div`
   align-items: center;
   width: 100%;
 `;
-const RowItem = styled.div`
+const Column = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: 1px solid Black;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+const ColumnItem = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   height: 50px;
-  padding-right: 5px;
-  padding-left: 5px;
+  padding-right: 20px;
+  padding-left: 20px;
 `;
 const ListContainer = styled.div`
   display: flex;
@@ -129,8 +139,7 @@ class Room extends React.Component {
     this.state = {};
   }
   render() {
-    console.log(this.props.match.params.roomId);
-    console.log(this.props.room);
+    console.log(this.props.room[0]);
     return (
       <Wrapper>
         <Row>
@@ -144,19 +153,19 @@ class Room extends React.Component {
             <Hotel />
           </Container>
         </Row>
-        <Row>
-          <RowItem>Sleep Time: {this.props.room[0].sleepTime}</RowItem>
-          <RowItem>Wake Time: {this.props.room[0].wakeTime}</RowItem>
-          <RowItem>
+        <Column>
+          <ColumnItem>Sleep Time: {this.props.room[0].sleepTime}</ColumnItem>
+          <ColumnItem>Wake Time: {this.props.room[0].wakeTime}</ColumnItem>
+          <ColumnItem>
             Schedule Mode On? {this.props.room[0].schedule ? "Yes" : "No"}
-          </RowItem>
-          <RowItem>
+          </ColumnItem>
+          <ColumnItem>
             Tablet On? {this.props.room[0].tabletOn ? "Yes" : "No"}
-          </RowItem>
-          <RowItem>
+          </ColumnItem>
+          <ColumnItem>
             Issues? {this.props.room[0].hasIssue ? "Yes" : "No"}
-          </RowItem>
-        </Row>
+          </ColumnItem>
+        </Column>
       </Wrapper>
     );
   }
