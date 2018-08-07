@@ -116,15 +116,29 @@ class Room extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sleepTime: "",
-      wakeTime: "",
-      alarmTime: "",
-      alarmSound: this.props.room[0].alarm.soundId
+      sleepTime: this.props.room[0].sleepTime,
+      wakeTime: this.props.room[0].wakeTime,
+      alarmTime: this.props.room[0].alarm.time,
+      alarmSound: this.props.room[0].alarm.soundId,
+      alarmDuration: this.props.room[0].alarm.duration,
+      schedule: this.props.room[0].schedule
     };
   }
   changeSound(e) {
     this.setState({ alarmSound: e.target.value });
-    console.log(this.state.alarmSound);
+  }
+  onClickDuration(e) {
+    this.setState({ alarmDuration: e.target.value });
+  }
+  onClickSchedule(e) {
+    this.setState({ schedule: !this.state.schedule });
+  }
+  submit() {
+    console.log("submit stuff");
+    this.props.history.goBack();
+  }
+  goBack() {
+    this.props.history.goBack();
   }
 
   renderBulbs(bulb) {
@@ -140,7 +154,6 @@ class Room extends React.Component {
     );
   }
   render() {
-    console.log(this.state.sleepTime);
     return (
       <Wrapper>
         <Row>
@@ -170,38 +183,59 @@ class Room extends React.Component {
         <Row>
           <Column>
             <ColumnItem>
-              Sleep Time: {this.props.room[0].sleepTime}
+              Sleep Time: {this.state.sleepTime}
               <Datetime
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.sleepTime}
-                onChange={moment => this.setState({ sleepTime: moment._d })}
+                timeformat={"hh:mm a"}
+                onChange={time => {
+                  time = time._d.toString();
+                  this.setState({
+                    sleepTime: time.slice(15, 21)
+                  });
+                }}
               />
             </ColumnItem>
             <ColumnItem>
-              Wake Time: {this.props.room[0].wakeTime}{" "}
-              <Datetime dateFormat={false} closeOnSelect={true} />
+              Wake Time: {this.state.wakeTime}{" "}
+              <Datetime
+                dateFormat={false}
+                closeOnSelect={true}
+                value={this.state.wakeTime}
+                onChange={moment => this.setState({ wakeTime: moment._d })}
+              />
             </ColumnItem>
             <ColumnItem>
-              Alarm Time: {this.props.room[0].alarm.time}{" "}
-              <Datetime dateFormat={false} closeOnSelect={true} />
+              Alarm Time: {this.state.alarmTime}{" "}
+              <Datetime
+                dateFormat={false}
+                closeOnSelect={true}
+                value={this.state.alarmTime}
+                onChange={moment => this.setState({ alarmTime: moment._d })}
+              />
             </ColumnItem>
             <ColumnItem>
               Alarm Sound: {this.props.room[0].alarm.soundId}{" "}
               <select
                 style={{ marginLeft: 10 }}
                 value={this.state.alarmSound}
-                onChange={e => this.changeSound(e)}
+                onChange={this.changeSound.bind(this)}
               >
                 <OptionInput value="Music AB">Music AB</OptionInput>
-                <OptionInput value="Music AB">Music CD</OptionInput>
-                <OptionInput value="Music AB">Music EF</OptionInput>
-                <OptionInput value="Music AB">Music GH</OptionInput>{" "}
+                <OptionInput value="Music CD">Music CD</OptionInput>
+                <OptionInput value="Music EF">Music EF</OptionInput>
+                <OptionInput value="Music GH">Music GH</OptionInput>{" "}
               </select>
             </ColumnItem>
             <ColumnItem>
               Alarm Duration: {this.props.room[0].alarm.duration}s{" "}
-              <select style={{ marginLeft: 10 }}>
+              <select
+                name="alarm duration"
+                style={{ marginLeft: 10 }}
+                value={this.state.alarmDuration}
+                onChange={this.onClickDuration.bind(this)}
+              >
                 <OptionInput value="5">5</OptionInput>
                 <OptionInput value="10">10</OptionInput>
                 <OptionInput value="15">15</OptionInput>
@@ -214,8 +248,11 @@ class Room extends React.Component {
             </ColumnItem>
             <ColumnItem>
               Schedule Mode On?{" "}
-              <button style={{ marginLeft: 20 }}>
-                {this.props.room[0].schedule ? "Yes" : "No"}
+              <button
+                style={{ marginLeft: 20, width: 50 }}
+                onClick={this.onClickSchedule.bind(this)}
+              >
+                {this.state.schedule ? "Yes" : "No"}
               </button>
             </ColumnItem>
           </Column>
@@ -225,8 +262,8 @@ class Room extends React.Component {
             </BulbBox>
           </Column>
         </Row>
-        {/* <Link>cancel</Link>
-        <Link>Submit</Link> */}
+        <button onClick={this.goBack.bind(this)}>cancel</button>
+        <button onClick={this.submit.bind(this)}>Submit</button>
       </Wrapper>
     );
   }
