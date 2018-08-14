@@ -190,9 +190,8 @@ class Room extends React.Component {
                 value={this.state.sleepTime}
                 timeformat={"hh:mm a"}
                 onChange={time => {
-                  time = time._d.toString();
                   this.setState({
-                    sleepTime: time.slice(15, 21)
+                    sleepTime: moment(time).format("hh:mm a")
                   });
                 }}
               />
@@ -203,7 +202,9 @@ class Room extends React.Component {
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.wakeTime}
-                onChange={moment => this.setState({ wakeTime: moment._d })}
+                onChange={time => {
+                  this.setState({ wakeTime: moment(time).format("hh:mm a") });
+                }}
               />
             </ColumnItem>
             <ColumnItem>
@@ -212,7 +213,9 @@ class Room extends React.Component {
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.alarmTime}
-                onChange={moment => this.setState({ alarmTime: moment._d })}
+                onChange={time =>
+                  this.setState({ alarmTime: moment(time).format("hh:mm a") })
+                }
               />
             </ColumnItem>
             <ColumnItem>
