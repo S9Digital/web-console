@@ -3,6 +3,8 @@ import { Provider } from "react-redux";
 import styled from "styled-components";
 import store from "./store";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import Defaults from "./components/Defaults";
+import Profile from "./components/Defaults";
 import Home from "./components/Home";
 import Property from "./components/Property";
 import RoomList from "./components/RoomList";
@@ -19,11 +21,16 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route
+                path="/property/:propertyId/default"
+                component={Defaults}
+              />
+              <Route
                 path="/property/:propertyId/rooms/:roomId"
                 component={Room}
               />
               <Route path="/property/:propertyId/rooms" component={RoomList} />
               <Route path="/property/:propertyId" component={Property} />
+              <Route path="/property/:propertyId/profile" component={Profile} />
             </Switch>
           </Wrapper>
         </Router>

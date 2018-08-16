@@ -31,7 +31,7 @@ const LoginContainer = styled.div`
 `;
 const Login = styled.form`
   width: 200px;
-  height: 400px;
+  height: 200px;
   flex: 1;
   display: flex;
   flex-direction: column;

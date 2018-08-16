@@ -111,10 +111,18 @@ class Property extends React.Component {
               </TileText>
             </TileContainer>
             <TileContainer>
-              <TileText>Default Settings</TileText>
+              <TileText>
+                <Link to={`${this.props.history.location.pathname}/default`}>
+                  Default Settings
+                </Link>
+              </TileText>
             </TileContainer>
             <TileContainer>
-              <TileText>Profile | Admin</TileText>
+              <TileText>
+                <Link to={`${this.props.history.location.pathname}/profile`}>
+                  Profile | Admin
+                </Link>
+              </TileText>
             </TileContainer>
           </Container>
           <BoldText>Questions or Need Help?</BoldText>
