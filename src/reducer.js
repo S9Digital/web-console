@@ -37,6 +37,17 @@ const DEFAULT_STATE = {
   weeklyAlarmMostUsed: "Music ABC",
   weeklyLightMostUsed: "8",
   userActions: [],
+  users: [
+    {
+      id: "user1",
+      name: "test",
+      email: "email@email.com",
+      password: "password",
+      isAdmin: true,
+      isSuperAdmin: true,
+      propertyId: "123"
+    }
+  ],
   properties: [
     { id: "123", name: "property 1", location: "place" },
     { id: "456", name: "property 2", location: "place" },

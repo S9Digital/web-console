@@ -66,7 +66,14 @@ class Home extends Component {
   }
   handleClick(e) {
     e.preventDefault();
-    this.props.history.push(`/property/${this.state.propertyId}`);
+    this.props.users.map(user => {
+      if (
+        this.state.username === user.name &&
+        this.state.password === user.password
+      ) {
+        this.props.history.push(`/property/${this.state.propertyId}`);
+      }
+    });
   }
   changeProperty(e) {
     this.setState({ propertyId: e.target.value });
@@ -119,7 +126,8 @@ class Home extends Component {
   }
 }
 const mapStateToProps = (state, props) => ({
-  properties: state.properties
+  properties: state.properties,
+  users: state.users
 });
 const mapDispatchToProps = dispatch => ({});
 
