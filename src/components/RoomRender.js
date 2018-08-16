@@ -52,8 +52,7 @@ const BulbBox = styled.div`
   flex-wrap: wrap;
   width: 110px;
   align-items: center;
-  justify-content: flex-start;
-  background-color: #38352a;
+  justify-content: center;
 `;
 const BulbItem = styled.div`
   width: 20px;
@@ -109,25 +108,22 @@ const AlarmContainer = styled.div`
 class RoomRender extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { bulbError: false };
+  }
+  componentDidMount() {
+    this.props.room.bulbs.map(bulb => {
+      if (bulb.error) {
+        this.setState({ bulbError: true });
+      }
+    });
   }
   handleClick(e, roomId) {
     e.preventDefault();
     this.props.history.push(`${this.props.location.pathname}/${roomId}`);
   }
-  renderBulbs(bulb) {
-    return (
-      <div key={bulb.id}>
-        {bulb.error ? (
-          <BulbItem>
-            <Bulb>{bulb.error ? bulb.id : null}</Bulb>
-          </BulbItem>
-        ) : null}
-      </div>
-    );
-  }
   render() {
     const item = this.props.room;
+    console.log(this.state.bulbError);
     return (
       <Row key={item.id}>
         <RowItem onClick={e => this.handleClick(e, item.id)}>
@@ -155,7 +151,7 @@ class RoomRender extends React.Component {
             </Off>
           )}
         </RowItem>
-        <BulbBox>{item.bulbs.map(bulb => this.renderBulbs(bulb))}</BulbBox>
+        <BulbBox>{this.state.bulbError ? "Error" : "✓"}</BulbBox>
 
         <RowItem>
           <CheckBox />
