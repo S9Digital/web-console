@@ -11,15 +11,15 @@ import {
   CREATE_USER_ATTEMPT,
   CREATE_USER_SUCCESS,
   CREATE_USER_ERROR,
-  DELETE_USER_ATTEMPT,
-  DELETE_USER_SUCCESS,
-  DELETE_USER_ERROR,
+  EDIT_USER_ATTEMPT,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_ERROR,
   CREATE_PROPERTY_ATTEMPT,
   CREATE_PROPERTY_SUCCESS,
   CREATE_PROPERTY_ERROR,
-  DELETE_PROPERTY_ATTEMPT,
-  DELETE_PROPERTY_SUCCESS,
-  DELETE_PROPERTY_ERROR
+  EDIT_PROPERTY_ATTEMPT,
+  EDIT_PROPERTY_SUCCESS,
+  EDIT_PROPERTY_ERROR
 } from "./actions/ProfileActions";
 
 const DEFAULT_STATE = {
@@ -71,6 +71,7 @@ const DEFAULT_STATE = {
   weeklyAlarmMostUsed: "Music ABC",
   weeklyLightMostUsed: "8",
   userActions: [],
+  currentUserId: "",
   users: [
     {
       id: "user1",
@@ -79,6 +80,15 @@ const DEFAULT_STATE = {
       password: "password",
       isAdmin: true,
       isSuperAdmin: true,
+      propertyId: "123"
+    },
+    {
+      id: "user2",
+      name: "test2",
+      email: "email2@email.com",
+      password: "password2",
+      isAdmin: false,
+      isSuperAdmin: false,
       propertyId: "123"
     }
   ],
@@ -348,6 +358,53 @@ export default function reducer(state = DEFAULT_STATE, action) {
         maxLevel: action.maxLevel,
         settingsResetTime: action.settingsResetTime
       }
+    };
+  }
+  if (action.type === CREATE_USER_SUCCESS) {
+    //create user id
+    return {
+      ...state,
+      users: [
+        {
+          id: "345",
+          email: action.email,
+          name: action.name,
+          password: action.password,
+          isAdmin: action.isAdmin,
+          isSuperAdmin: action.isSuperAdmin
+        },
+        ...state.users
+      ]
+    };
+  }
+  if (action.type === EDIT_USER_SUCCESS) {
+    //create user id
+    return {
+      ...state,
+      users: [
+        {
+          id: "345",
+          email: action.email,
+          name: action.name,
+          password: action.password,
+          isAdmin: action.isAdmin,
+          isSuperAdmin: action.isSuperAdmin
+        },
+        ...state.users
+      ]
+    };
+  }
+  if (action.type === CREATE_PROPERTY_SUCCESS) {
+    //create user property id
+    return {
+      ...state,
+      properties: [
+        {
+          name: action.name,
+          location: action.address
+        },
+        ...state.properties
+      ]
     };
   }
   return state;

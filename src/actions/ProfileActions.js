@@ -1,9 +1,22 @@
+export const LOGIN_USER_ATTEMPT = "LOGIN_USER_ATTEMPT";
+export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
+export const LOGIN_USER_ERROR = "LOGIN_USER_ERROR";
+export const logingUser = (username, email, property) => dispatch => {
+  dispatch({ type: LOGIN_USER_ATTEMPT });
+  //id
+  dispatch({ type: LOGIN_USER_SUCCESS });
+  //   .catch(error => {
+  //   dispatch({type: LOGIN_USER_ERROR, error: error})
+  //   })
+};
+
 export const CREATE_USER_ATTEMPT = "CREATE_USER_ATTEMPT";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
 export const CREATE_USER_ERROR = "CREATE_USER_ERROR";
 export const createUser = (
   email,
   name,
+  password,
   isAdmin,
   isSuperAdmin,
   property
@@ -14,8 +27,9 @@ export const createUser = (
     type: CREATE_USER_SUCCESS,
     email: email,
     name: name,
+    password: password,
     isAdmin: isAdmin,
-    isSuperAdmin: isAdmin,
+    isSuperAdmin: isSuperAdmin,
     property: property
   });
   //   .catch(error => {
@@ -23,28 +37,28 @@ export const createUser = (
   //   })
 };
 
-export const DELETE_USER_ATTEMPT = "DELETE_USER_ATTEMPT";
-export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
-export const DELETE_USER_ERROR = "DELETE_USER_ERROR";
-export const deleteUser = (
+export const EDIT_USER_ATTEMPT = "EDIT_USER_ATTEMPT";
+export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
+export const EDIT_USER_ERROR = "EDIT_USER_ERROR";
+export const editUser = (
   email,
   name,
   isAdmin,
   isSuperAdmin,
   property
 ) => dispatch => {
-  dispatch({ type: DELETE_USER_ATTEMPT });
+  dispatch({ type: EDIT_USER_ATTEMPT });
   //insert
   dispatch({
-    type: DELETE_USER_SUCCESS,
+    type: EDIT_USER_SUCCESS,
     email: email,
     name: name,
     isAdmin: isAdmin,
-    isSuperAdmin: isAdmin,
+    isSuperAdmin: isSuperAdmin,
     property: property
   });
   //   .catch(error => {
-  //   dispatch({type: DELETE_USER_ERROR, error: error})
+  //   dispatch({type: EDIT_USER_ERROR, error: error})
   //   })
 };
 
@@ -64,18 +78,18 @@ export const createProperty = (name, address) => dispatch => {
   //   })
 };
 
-export const DELETE_PROPERTY_ATTEMPT = "DELETE_PROPERTY_ATTEMPT";
-export const DELETE_PROPERTY_SUCCESS = "DELETE_PROPERTY_SUCCESS";
-export const DELETE_PROPERTY_ERROR = "DELETE_PROPERTY_ERROR";
-export const deleteProperty = (name, address) => dispatch => {
-  dispatch({ type: DELETE_PROPERTY_ATTEMPT });
+export const EDIT_PROPERTY_ATTEMPT = "EDIT_PROPERTY_ATTEMPT";
+export const EDIT_PROPERTY_SUCCESS = "EDIT_PROPERTY_SUCCESS";
+export const EDIT_PROPERTY_ERROR = "EDIT_PROPERTY_ERROR";
+export const editProperty = (name, address) => dispatch => {
+  dispatch({ type: EDIT_PROPERTY_ATTEMPT });
   //insert
   dispatch({
-    type: DELETE_PROPERTY_SUCCESS,
+    type: EDIT_PROPERTY_SUCCESS,
     name: name,
     address: address
   });
   //   .catch(error => {
-  //   dispatch({type: DELETE_PROPERTY_ERROR, error: error})
+  //   dispatch({type: EDIT_PROPERTY_ERROR, error: error})
   //   })
 };
