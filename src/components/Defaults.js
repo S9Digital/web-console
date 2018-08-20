@@ -13,6 +13,7 @@ import {
 import Datetime from "react-datetime";
 import RoomRender from "./RoomRender";
 import styles from "./timePicker.css";
+import { setDefaults } from "../actions/PropertyActions";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -76,6 +77,11 @@ class Defaults extends React.Component {
     this.state = {
       sleepTime: null,
       wakeTime: null,
+      minCCT: "500",
+      maxCCT: "2500",
+      minLevel: "0",
+      maxLevel: "100",
+      settingsResetTime: null,
       alarmTime: null,
       alarmSound: null,
       alarmDuration: "5",
@@ -92,7 +98,15 @@ class Defaults extends React.Component {
     this.setState({ schedule: !this.state.schedule });
   }
   submit() {
-    console.log("submit stuff");
+    this.props.setNewDefault(
+      this.state.wakeTime,
+      this.state.sleepTime,
+      this.state.minCCT,
+      this.state.maxCCT,
+      this.state.minLevel,
+      this.state.maxLevel,
+      this.state.settingsResetTime
+    );
     this.props.history.goBack();
   }
   goBack() {
@@ -100,6 +114,7 @@ class Defaults extends React.Component {
   }
 
   render() {
+    console.log(this.props.defaults);
     return (
       <Wrapper>
         <Row>
@@ -185,6 +200,19 @@ class Defaults extends React.Component {
                 {this.state.schedule ? "Yes" : "No"}
               </button>
             </ColumnItem>
+            <ColumnItem>
+              Settings Reset Time?: {this.state.settingsResetTime}{" "}
+              <Datetime
+                dateFormat={false}
+                closeOnSelect={true}
+                value={this.state.settingsResetTime}
+                onChange={time => {
+                  this.setState({
+                    settingsResetTime: moment(time).format("hh:mm a")
+                  });
+                }}
+              />
+            </ColumnItem>
           </Column>
         </Row>
         <button onClick={this.goBack.bind(this)}>cancel</button>
@@ -193,8 +221,32 @@ class Defaults extends React.Component {
     );
   }
 }
-const mapStateToProps = (state, props) => ({});
-const mapDispatchToProps = dispatch => ({});
+const mapStateToProps = (state, props) => ({
+  defaults: state.default
+});
+const mapDispatchToProps = dispatch => ({
+  setNewDefault: (
+    wakeTime,
+    sleepTime,
+    minCCT,
+    maxCCT,
+    minLevel,
+    maxLevel,
+    settingsResetTime
+  ) => {
+    return dispatch(
+      setDefaults(
+        wakeTime,
+        sleepTime,
+        minCCT,
+        maxCCT,
+        minLevel,
+        maxLevel,
+        settingsResetTime
+      )
+    );
+  }
+});
 
 export default withRouter(
   connect(

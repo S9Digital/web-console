@@ -38,6 +38,16 @@ const Login = styled.form`
   justify-content: center;
   align-items: center;
 `;
+const ColumnItem = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 50px;
+  padding-right: 20px;
+  padding-left: 20px;
+`;
 const TextInput = styled.input`
   width: 200px;
   height: 50px;
@@ -55,18 +65,21 @@ const OptionInput = styled.option`
   align-items: center;
 `;
 
-class Home extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
-      propertyId: "123"
+      propertyId: "123",
+      profileAction: "createUser"
     };
   }
   handleClick(e) {
     e.preventDefault();
-    this.props.history.push(`/property/${this.state.propertyId}`);
+  }
+  changeAction(e) {
+    this.setState({ profileAction: e.target.value });
   }
   changeProperty(e) {
     this.setState({ propertyId: e.target.value });
@@ -77,48 +90,78 @@ class Home extends Component {
   changePassword(e) {
     this.setState({ password: e.target.value });
   }
-  renderPropertySelect(property) {
+  renderUsers() {
     return (
-      <OptionInput key={property.id} value={property.id}>
-        {property.name}
+      <OptionInput key={this.props.users.id} value={this.props.users.id}>
+        {this.props.users.name}
       </OptionInput>
     );
+  }
+  renderForm() {
+    if (this.state.profileAction === "createUser") {
+      return (
+        <AccountContainer>
+          Create User
+          <Login onSubmit={e => this.handleClick(e)} />
+        </AccountContainer>
+      );
+    }
+    if (this.state.profileAction === "editUser") {
+      return (
+        <AccountContainer>
+          Edit User
+          <Login onSubmit={e => this.handleClick(e)} />
+        </AccountContainer>
+      );
+    }
+    if (this.state.profileAction === "createProperty") {
+      return (
+        <AccountContainer>
+          Create Property
+          <Login onSubmit={e => this.handleClick(e)} />
+        </AccountContainer>
+      );
+    }
+    if (this.state.profileAction === "editProperty") {
+      return (
+        <AccountContainer>
+          Edit Property
+          <Login onSubmit={e => this.handleClick(e)} />
+        </AccountContainer>
+      );
+    }
   }
   render() {
     return (
       <Wrapper>
-        <AccountContainer>
-          Create User
-          <Login onSubmit={e => this.handleClick(e)}>
-            <p>Property</p>
-            <select
-              name="/property"
-              value={this.state.propertyId}
-              onChange={e => this.changeProperty(e)}
-            >
-              {this.props.properties.map(property =>
-                this.renderPropertySelect(property)
-              )}
-            </select>
-            <TextInput
-              placeholder="username"
-              value={this.state.username}
-              onChange={e => this.changeUsername(e)}
-            />
-            <TextInput
-              placeholder="password"
-              value={this.state.password}
-              onChange={e => this.changePassword(e)}
-            />
-            <TextInput type="submit" value="submit" />
-          </Login>
-        </AccountContainer>
+        <ColumnItem>
+          Profile Action:
+          <select
+            name="alarm duration"
+            style={{ marginLeft: 10 }}
+            value={this.state.profileAction}
+            onChange={this.changeAction.bind(this)}
+          >
+            {this.props.users.isAdmin ? (
+              <OptionInput value="createUser">Create user</OptionInput>
+            ) : null}
+            <OptionInput value="editUser">Edit User</OptionInput>
+            {this.props.users.isSuperAdmin ? (
+              <OptionInput value="createProperty">Create Property</OptionInput>
+            ) : null}
+            {this.props.users.isSuperAdmin ? (
+              <OptionInput value="editProperty">Edit Property</OptionInput>
+            ) : null}
+          </select>
+        </ColumnItem>
+        {this.renderForm()}
       </Wrapper>
     );
   }
 }
 const mapStateToProps = (state, props) => ({
-  properties: state.properties
+  properties: state.properties,
+  users: state.users[0]
 });
 const mapDispatchToProps = dispatch => ({});
 
@@ -126,5 +169,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Home)
+  )(Profile)
 );

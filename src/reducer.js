@@ -1,4 +1,38 @@
+import {
+  SET_DEFAULTS_ATTEMPT,
+  SET_DEFAULTS_SUCCESS,
+  SET_DEFAULTS_ERROR,
+  SET_ROOM_ATTEMPT,
+  SET_ROOM_SUCCESS,
+  SET_ROOM_ERROR
+} from "./actions/PropertyActions";
+
+import {
+  CREATE_USER_ATTEMPT,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_ERROR,
+  DELETE_USER_ATTEMPT,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_ERROR,
+  CREATE_PROPERTY_ATTEMPT,
+  CREATE_PROPERTY_SUCCESS,
+  CREATE_PROPERTY_ERROR,
+  DELETE_PROPERTY_ATTEMPT,
+  DELETE_PROPERTY_SUCCESS,
+  DELETE_PROPERTY_ERROR
+} from "./actions/ProfileActions";
+
 const DEFAULT_STATE = {
+  default: {
+    alerts: null,
+    wakeTime: null,
+    sleepTime: null,
+    minCCT: null,
+    maxCCT: null,
+    minLevel: null,
+    maxLevel: null,
+    settingsResetTime: null
+  },
   alerts: null,
   wakeTime: null,
   sleepTime: null,
@@ -302,5 +336,19 @@ const DEFAULT_STATE = {
 };
 
 export default function reducer(state = DEFAULT_STATE, action) {
+  if (action.type === SET_DEFAULTS_SUCCESS) {
+    return {
+      ...state,
+      default: {
+        wakeTime: action.wakeTime,
+        sleepTime: action.sleepTime,
+        minCCT: action.minCCT,
+        maxCCT: action.maxCCT,
+        minLevel: action.minLevel,
+        maxLevel: action.maxLevel,
+        settingsResetTime: action.settingsResetTime
+      }
+    };
+  }
   return state;
 }
