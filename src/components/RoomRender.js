@@ -123,7 +123,7 @@ class RoomRender extends React.Component {
   }
   render() {
     const item = this.props.room;
-    console.log(this.state.bulbError);
+    console.log(item);
     return (
       <Row key={item.id}>
         <RowItem onClick={e => this.handleClick(e, item.id)}>

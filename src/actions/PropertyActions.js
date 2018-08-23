@@ -4,11 +4,15 @@ export const SET_DEFAULTS_ERROR = "SET_DEFAULTS_ERROR";
 export const setDefaults = (
   wakeTime,
   sleepTime,
+  alarmTime,
+  alarmSound,
+  alarmDuration,
   minCCT,
   maxCCT,
   minLevel,
   maxLevel,
-  settingsResetTime
+  settingsResetTime,
+  scheduleMode
 ) => dispatch => {
   dispatch({ type: SET_DEFAULTS_ATTEMPT });
   //insert
@@ -16,11 +20,15 @@ export const setDefaults = (
     type: SET_DEFAULTS_SUCCESS,
     wakeTime: wakeTime,
     sleepTime: sleepTime,
+    alarmTime,
+    alarmSound,
+    alarmDuration,
     minCCT: minCCT,
     maxCCT: maxCCT,
     minLevel: minLevel,
     maxLevel: maxLevel,
-    settingsResetTime: settingsResetTime
+    settingsResetTime: settingsResetTime,
+    scheduleMode
   });
   //   .catch(error => {
   //   dispatch({type: SET_DEFAULTS_ERROR, error: error})
