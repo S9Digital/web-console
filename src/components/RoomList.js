@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
 import RoomRender from "./RoomRender";
-
+import CheckBox from "./CheckBox";
 const Wrapper = styled.div`
   width: 100%;
   height: 100% - 200px;
@@ -80,7 +80,11 @@ class RoomList extends React.Component {
             <ListHeader>Alarm</ListHeader>
             <ListHeader>Schedule?</ListHeader>
             <ListHeader>Light Errors</ListHeader>
-            <ListHeader>Set to Default?</ListHeader>
+            <ListHeader
+              style={{ flexDirection: "row", width: 140, flexWrap: "nowrap" }}
+            >
+              Reset to Default? <CheckBox />
+            </ListHeader>
           </Row>
           {this.props.rooms.map(room => (
             <RoomRender room={room} key={room.id} />

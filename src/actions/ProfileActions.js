@@ -93,3 +93,13 @@ export const editProperty = (name, address) => dispatch => {
   //   dispatch({type: EDIT_PROPERTY_ERROR, error: error})
   //   })
 };
+
+//separate API calls currently handled in other methods for frontend (but might need to be separated for backend)
+//{post}/v1/password/reset
+//{ email }
+
+//{put}/v1/password/reset
+//{ email, password, code }
+
+//{put/get}/v1/property/{propertyId}/alertUsers
+//{ [userId] }

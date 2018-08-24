@@ -94,7 +94,7 @@ const BulbItem = styled.div`
   align-items: center;
 `;
 const Bulb = styled.p`
-  font-size: 12px;
+  font-size: 8px;
   color: black;
   cursor: default;
   display: flex;
@@ -175,12 +175,11 @@ class Room extends React.Component {
   renderBulbs(bulb) {
     return (
       <div key={bulb.id}>
-        {bulb.error ? (
-          <BulbItem>
-            <Bulb>{bulb.error ? bulb.id + ")" : null}</Bulb>
-            <Bulb> {bulb.lastHeard ? bulb.lastHeard : null}</Bulb>
-          </BulbItem>
-        ) : null}
+        <BulbItem>
+          <Bulb>{bulb.id + ")"}</Bulb>
+          <Bulb>{bulb.error ? "error" : "working"}</Bulb>
+          <Bulb> {bulb.lastHeard ? bulb.lastHeard : null}</Bulb>
+        </BulbItem>
       </div>
     );
   }
