@@ -107,6 +107,12 @@ const DEFAULT_STATE = {
       wakeTime: "6:00am",
       alarm: { time: null, soundId: "Music AB", duration: "60" },
       sleepSound: { isActive: null, soundId: null, duration: null },
+      minCCT: "500",
+      maxCCT: "2500",
+      minLevel: "0",
+      maxLevel: "100",
+      settingsResetTime: null,
+      scheduleMode: true,
       tablet: { lastHeard: null, on: true },
       sensors: {
         temp: null,
@@ -153,6 +159,12 @@ const DEFAULT_STATE = {
       sleepTime: null,
       wakeTime: null,
       alarm: { time: null, soundId: null, duration: null },
+      minCCT: "500",
+      maxCCT: "2500",
+      minLevel: "0",
+      maxLevel: "100",
+      settingsResetTime: null,
+      scheduleMode: null,
       sleepSound: { isActive: null, soundId: null, duration: null },
       tablet: { lastHeard: null, on: true },
       sensors: {
@@ -366,6 +378,64 @@ export default function reducer(state = DEFAULT_STATE, action) {
       }
     };
   }
+  if (action.type === SET_ROOM_SUCCESS) {
+    console.log("set room success");
+    return {
+      ...state,
+      rooms: state.rooms.map(room => {
+        // console.log(room.id + "is the same as?" + action.id);
+        if (room.id === action.id) {
+          console.log(room);
+          return {
+            ...room,
+            id: action.id,
+            sleepTime: action.sleepTime,
+            wakeTime: action.wakeTime,
+            alarm: {
+              time: action.alarmTime,
+              soundId: action.alarmSound,
+              duration: action.alarmSound
+            },
+            minCCT: action.minCCT,
+            maxCCT: action.maxCCT,
+            minLevel: action.minLevel,
+            maxLevel: action.maxLevel,
+            settingsResetTime: action.settingsResetTime,
+            scheduleMode: action.scheduleMode
+          };
+        } else {
+          return room;
+        }
+      })
+    };
+  }
+  // if (action.type === SET_ROOM_SUCCESS) {
+  //   const currentRoom = state.rooms.filter(room => {
+  //     return room.id === action.id;
+  //   });
+  //   const roomIndex = state.rooms.findIndex(room => room.id === action.id);
+  //   console.log(currentRoom);
+  //   return {
+  //     ...state,
+  //     rooms: [
+  //       (currentRoom: {
+  //         sleepTime: action.sleepTime,
+  //         wakeTime: action.wakeTime,
+  //         alarm: {
+  //           time: action.alarmTime,
+  //           soundId: action.alarmSound,
+  //           duration: action.alarmSound
+  //         },
+  //         minCCT: action.minCCT,
+  //         maxCCT: action.maxCCT,
+  //         minLevel: action.minLevel,
+  //         maxLevel: action.maxLevel,
+  //         settingsResetTime: action.settingsResetTime,
+  //         scheduleMode: action.scheduleMode
+  //       })
+  //     ]
+  //   };
+  // }
   if (action.type === CREATE_USER_SUCCESS) {
     //create user id
     return {

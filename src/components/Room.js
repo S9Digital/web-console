@@ -10,6 +10,7 @@ import {
   Switch,
   withRouter
 } from "react-router-dom";
+import { setRoom } from "../actions/PropertyActions";
 import Datetime from "react-datetime";
 import RoomRender from "./RoomRender";
 import styles from "./timePicker.css";
@@ -121,7 +122,12 @@ class Room extends React.Component {
       alarmTime: this.props.room[0].alarm.time,
       alarmSound: this.props.room[0].alarm.soundId,
       alarmDuration: this.props.room[0].alarm.duration,
-      schedule: this.props.room[0].schedule
+      minCCT: this.props.room[0].minCCT,
+      maxCCT: this.props.room[0].maxCCT,
+      minLevel: this.props.room[0].minLevel,
+      maxLevel: this.props.room[0].maxLevel,
+      settingsResetTime: this.props.room[0].settingsResetTime,
+      scheduleMode: this.props.room[0].scheduleMode
     };
   }
   changeSound(e) {
@@ -130,11 +136,36 @@ class Room extends React.Component {
   onClickDuration(e) {
     this.setState({ alarmDuration: e.target.value });
   }
+  onClickMinCCT(e) {
+    this.setState({ minCCT: e.target.value });
+  }
+  onClickMaxCCT(e) {
+    this.setState({ maxCCT: e.target.value });
+  }
+  onClickMinLevel(e) {
+    this.setState({ minLevel: e.target.value });
+  }
+  onClickMaxLevel(e) {
+    this.setState({ maxLevel: e.target.value });
+  }
   onClickSchedule(e) {
-    this.setState({ schedule: !this.state.schedule });
+    this.setState({ scheduleMode: !this.state.scheduleMode });
   }
   submit() {
-    console.log("submit stuff");
+    this.props.updateRoom(
+      this.props.room[0].id,
+      this.state.sleepTime,
+      this.state.wakeTime,
+      this.state.alarmTime,
+      this.state.alarmSound,
+      this.state.alarmDuration,
+      this.state.minCCT,
+      this.state.maxCCT,
+      this.state.minLevel,
+      this.state.maxLevel,
+      this.state.settingsResetTime,
+      this.state.scheduleMode
+    );
     this.props.history.goBack();
   }
   goBack() {
@@ -250,12 +281,96 @@ class Room extends React.Component {
               </select>
             </ColumnItem>
             <ColumnItem>
+              Min Tone: {this.state.minCCT}{" "}
+              <select
+                name="min CCT"
+                style={{ marginLeft: 10 }}
+                value={this.state.minCCT}
+                onChange={this.onClickMinCCT.bind(this)}
+              >
+                <OptionInput value="0">0</OptionInput>
+                <OptionInput value="250">250</OptionInput>
+                <OptionInput value="500">500</OptionInput>
+                <OptionInput value="750">750</OptionInput>
+                <OptionInput value="1000">1000</OptionInput>
+                <OptionInput value="1250">1250</OptionInput>
+                <OptionInput value="1500">1500</OptionInput>
+                <OptionInput value="1750">1750</OptionInput>
+                <OptionInput value="2000">2000</OptionInput>
+                <OptionInput value="2250">2250</OptionInput>
+                <OptionInput value="2500">2500</OptionInput>
+              </select>
+            </ColumnItem>
+            <ColumnItem>
+              Max Tone: {this.state.maxCCT}{" "}
+              <select
+                name="max CCT"
+                style={{ marginLeft: 10 }}
+                value={this.state.maxCCT}
+                onChange={this.onClickMaxCCT.bind(this)}
+              >
+                <OptionInput value="0">0</OptionInput>
+                <OptionInput value="250">250</OptionInput>
+                <OptionInput value="500">500</OptionInput>
+                <OptionInput value="750">750</OptionInput>
+                <OptionInput value="1000">1000</OptionInput>
+                <OptionInput value="1250">1250</OptionInput>
+                <OptionInput value="1500">1500</OptionInput>
+                <OptionInput value="1750">1750</OptionInput>
+                <OptionInput value="2000">2000</OptionInput>
+                <OptionInput value="2250">2250</OptionInput>
+                <OptionInput value="2500">2500</OptionInput>
+              </select>
+            </ColumnItem>
+            <ColumnItem>
+              Min Level: {this.state.minLevel}{" "}
+              <select
+                name="min level"
+                style={{ marginLeft: 10 }}
+                value={this.state.minLevel}
+                onChange={this.onClickMinLevel.bind(this)}
+              >
+                <OptionInput value="0">0</OptionInput>
+                <OptionInput value="10">10</OptionInput>
+                <OptionInput value="20">20</OptionInput>
+                <OptionInput value="30">30</OptionInput>
+                <OptionInput value="40">40</OptionInput>
+                <OptionInput value="50">50</OptionInput>
+                <OptionInput value="60">60</OptionInput>
+                <OptionInput value="70">70</OptionInput>
+                <OptionInput value="80">80</OptionInput>
+                <OptionInput value="90">90</OptionInput>
+                <OptionInput value="100">100</OptionInput>
+              </select>
+            </ColumnItem>
+            <ColumnItem>
+              Max Level: {this.state.msxLevel}{" "}
+              <select
+                name="max level"
+                style={{ marginLeft: 10 }}
+                value={this.state.maxLevel}
+                onChange={this.onClickMaxLevel.bind(this)}
+              >
+                <OptionInput value="0">0</OptionInput>
+                <OptionInput value="10">10</OptionInput>
+                <OptionInput value="20">20</OptionInput>
+                <OptionInput value="30">30</OptionInput>
+                <OptionInput value="40">40</OptionInput>
+                <OptionInput value="50">50</OptionInput>
+                <OptionInput value="60">60</OptionInput>
+                <OptionInput value="70">70</OptionInput>
+                <OptionInput value="80">80</OptionInput>
+                <OptionInput value="90">90</OptionInput>
+                <OptionInput value="100">100</OptionInput>
+              </select>
+            </ColumnItem>
+            <ColumnItem>
               Schedule Mode On?{" "}
               <button
                 style={{ marginLeft: 20, width: 50 }}
                 onClick={this.onClickSchedule.bind(this)}
               >
-                {this.state.schedule ? "Yes" : "No"}
+                {this.state.scheduleMode ? "Yes" : "No"}
               </button>
             </ColumnItem>
           </Column>
@@ -280,7 +395,39 @@ const mapStateToProps = (state, props) => ({
       return true;
   })
 });
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  updateRoom: (
+    id,
+    sleepTime,
+    wakeTime,
+    alarmTime,
+    alarmSound,
+    alarmDuration,
+    minCCT,
+    maxCCT,
+    minLevel,
+    maxLevel,
+    settingsResetTime,
+    scheduleMode
+  ) => {
+    return dispatch(
+      setRoom(
+        id,
+        sleepTime,
+        wakeTime,
+        alarmTime,
+        alarmSound,
+        alarmDuration,
+        minCCT,
+        maxCCT,
+        minLevel,
+        maxLevel,
+        settingsResetTime,
+        scheduleMode
+      )
+    );
+  }
+});
 
 export default withRouter(
   connect(

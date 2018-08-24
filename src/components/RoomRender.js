@@ -141,7 +141,7 @@ class RoomRender extends React.Component {
         </RowItem>
         <RowItem>{item.alarm.time ? "On" : "Off"}</RowItem>
         <RowItem>
-          {item.schedule ? (
+          {item.scheduleMode ? (
             <On>
               <p style={{ margin: 5 }}>On</p>
             </On>
@@ -154,7 +154,7 @@ class RoomRender extends React.Component {
         <BulbBox>{this.state.bulbError ? "Error" : "✓"}</BulbBox>
 
         <RowItem>
-          <CheckBox />
+          <CheckBox room={item.id} />
         </RowItem>
       </Row>
     );
