@@ -19,7 +19,7 @@ class CheckBox extends React.Component {
     this.state = { checked: false };
   }
   handleClick() {
-    this.setState({ checked: true });
+    this.setState({ checked: !this.state.checked });
   }
 
   render() {

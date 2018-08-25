@@ -96,6 +96,17 @@ const Off = styled.div`
   align-items: center;
 `;
 
+const Box = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  background-color: #888888;
+  box-shadow: 2px 2px rgba(14, 14, 14, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+`;
 const AlarmContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -108,7 +119,7 @@ const AlarmContainer = styled.div`
 class RoomRender extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { bulbError: false };
+    this.state = { bulbError: false, checked: false };
   }
   componentDidMount() {
     this.props.room.bulbs.map(bulb => {
@@ -117,13 +128,16 @@ class RoomRender extends React.Component {
       }
     });
   }
+  handleCheck(room) {
+    this.setState({ checked: !this.state.checked });
+    this.props.onPickReset(room);
+  }
   handleClick(e, roomId) {
     e.preventDefault();
     this.props.history.push(`${this.props.location.pathname}/${roomId}`);
   }
   render() {
     const item = this.props.room;
-    console.log(item);
     return (
       <Row key={item.id}>
         <RowItem onClick={e => this.handleClick(e, item.id)}>
@@ -154,7 +168,9 @@ class RoomRender extends React.Component {
         <BulbBox>{this.state.bulbError ? "Error" : "✓"}</BulbBox>
 
         <RowItem>
-          <CheckBox room={item.id} />
+          <Box onClick={this.handleCheck.bind(this, item.id)}>
+            {this.state.checked ? "X" : null}
+          </Box>
         </RowItem>
       </Row>
     );
