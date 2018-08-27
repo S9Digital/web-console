@@ -96,8 +96,7 @@ class RoomList extends React.Component {
     }
   }
   render() {
-    // console.log(this.state.roomsToReset);
-    console.log(this.props.default);
+    console.log(this.state.roomsToReset);
     return (
       <Wrapper>
         <Row>
@@ -132,19 +131,17 @@ class RoomList extends React.Component {
             <RoomRender
               room={room}
               key={room.id}
-              onPickReset={room => {
-                // this.this.state.roomsToReset.map(oldRoom => {
-                //   console.log(oldRoom + "is equal to?" + room);
-                //   if (oldRoom === room) {
-                //     return;
-                //   } else {
-                //     return {
-                //       ...oldRoom
-                //     };
-                //   }
-                // });
+              clearPick={roomPick => {
+                let temp = this.state.roomsToReset.filter(oldRoom => {
+                  oldRoom !== roomPick;
+                });
                 this.setState({
-                  roomsToReset: [...this.state.roomsToReset, room]
+                  roomsToReset: temp
+                });
+              }}
+              onPickReset={roomPick => {
+                this.setState({
+                  roomsToReset: [...this.state.roomsToReset, roomPick]
                 });
               }}
             />
