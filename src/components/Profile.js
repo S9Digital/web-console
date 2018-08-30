@@ -106,6 +106,7 @@ class Profile extends Component {
       this.state.isSuperAdmin,
       this.state.propertyId
     );
+    this.props.history.goBack();
   }
   submitNewProperty(e) {
     e.preventDefault();
@@ -113,6 +114,7 @@ class Profile extends Component {
       this.state.hotelName,
       this.state.hotelAddress
     );
+    this.props.history.goBack();
   }
   changeAction(e) {
     this.setState({ profileAction: e.target.value });
@@ -152,6 +154,9 @@ class Profile extends Component {
   }
   changeTwoFactor(e) {
     this.setState({ isTwoFactor: e.target.value });
+  }
+  goBack() {
+    this.props.history.goBack();
   }
 
   renderActionSelect() {
@@ -360,6 +365,7 @@ class Profile extends Component {
         <Header />
         {this.renderActionSelect()}
         {this.renderForm()}
+        <button onClick={this.goBack.bind(this)}>cancel</button>
       </Wrapper>
     );
   }

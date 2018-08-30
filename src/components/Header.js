@@ -76,6 +76,7 @@ class Header extends React.Component {
         </TitleContainer>
         <Container>
           <Moment element={TimeText} format="dddd MMMM D, YYYY - H:mma z" />
+          {/* set up users to pull from list of users correctly */}
           <TimeText>Welcome - {this.props.user}</TimeText>
         </Container>
       </Wrapper>
