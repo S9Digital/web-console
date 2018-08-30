@@ -81,6 +81,24 @@ class RoomList extends React.Component {
     super(props);
     this.state = { roomsToReset: [], checked: false };
   }
+  handleSingleDefaultReset(room) {
+    //select all rooms for reset
+    const def = this.props.default;
+    this.props.resetToDefault(
+      room,
+      def.wakeTime,
+      def.sleepTime,
+      def.alarm.time,
+      def.alarm.soundId,
+      def.alarm.duration,
+      def.minCCT,
+      def.maxCCt,
+      def.minLevel,
+      def.maxLevel,
+      def.settingsResetTime,
+      def.scheduleMode
+    );
+  }
   handleDefaultReset() {
     //select all rooms for reset
     const def = this.props.default;
@@ -162,19 +180,23 @@ class RoomList extends React.Component {
             <RoomRender
               room={room}
               key={room.id}
-              clearPick={roomPick => {
-                let temp = this.state.roomsToReset.filter(oldRoom => {
-                  oldRoom !== roomPick;
-                });
-                this.setState({
-                  roomsToReset: temp
-                });
-              }}
-              onPickReset={roomPick => {
-                this.setState({
-                  roomsToReset: [...this.state.roomsToReset, roomPick]
-                });
-              }}
+              //reset on press
+              clearPick={roomPick => this.handleSingleDefaultReset(roomPick)}
+
+              //adding and subtracting from list method of reset
+              // clearPick={roomPick => {
+              //   let temp = this.state.roomsToReset.filter(oldRoom => {
+              //     oldRoom !== roomPick;
+              //   });
+              //   this.setState({
+              //     roomsToReset: temp
+              //   });
+              // }}
+              // onPickReset={roomPick => {
+              //   this.setState({
+              //     roomsToReset: [...this.state.roomsToReset, roomPick]
+              //   });
+              // }}
             />
           ))}
         </ListContainer>

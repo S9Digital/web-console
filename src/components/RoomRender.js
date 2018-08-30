@@ -129,14 +129,14 @@ class RoomRender extends React.Component {
     });
   }
   handleCheck(room) {
-    if (this.state.checked) {
+    if (!this.state.checked) {
       this.props.clearPick(room);
       this.setState({ checked: false });
     }
-    if (!this.state.checked) {
-      this.props.onPickReset(room);
-      this.setState({ checked: true });
-    }
+    // if (!this.state.checked) {
+    //   this.props.onPickReset(room);
+    //   this.setState({ checked: true });
+    // }
   }
   handleClick(e, roomId) {
     e.preventDefault();
