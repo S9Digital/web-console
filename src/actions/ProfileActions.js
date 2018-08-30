@@ -23,6 +23,7 @@ export const createUser = (
 ) => dispatch => {
   dispatch({ type: CREATE_USER_ATTEMPT });
   //insert
+  console.log(email + ", " + name + ", " + password + ", " + property);
   dispatch({
     type: CREATE_USER_SUCCESS,
     email: email,

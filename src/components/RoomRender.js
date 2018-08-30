@@ -153,12 +153,8 @@ class RoomRender extends React.Component {
         </RowItem>
         <RowItem>{item.id}</RowItem>
         <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>
-        <RowItem>
-          <AlarmContainer>
-            {item.wakeTime ? item.wakeTime : "Off"} |{" "}
-            {item.sleepTime ? item.sleepTime : "Off"}
-          </AlarmContainer>
-        </RowItem>
+        <RowItem>{item.wakeTime ? item.wakeTime : "Off"}</RowItem>
+        <RowItem>{item.sleepTime ? item.sleepTime : "Off"}</RowItem>
         <RowItem>{item.alarm.time ? "On" : "Off"}</RowItem>
         <RowItem>
           {item.scheduleMode ? (

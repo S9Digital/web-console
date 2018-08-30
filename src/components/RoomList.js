@@ -29,7 +29,6 @@ const Row = styled.div`
   border: solid Black;
   border-width: 0px 1px 1px 1px;
   justify-content: center;
-  align-items: center;
   width: 100%;
 `;
 const ListContainer = styled.div`
@@ -54,6 +53,17 @@ const ListHeader = styled.li`
   padding-right: 5px;
   padding-left: 5px;
 `;
+const ListHeaderColumn = styled.li`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 50px;
+  padding-right: 5px;
+  padding-left: 5px;
+`;
 const Box = styled.div`
   width: 20px;
   height: 20px;
@@ -63,7 +73,8 @@ const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 2px;
+  margin-right: 10px;
 `;
 class RoomList extends React.Component {
   constructor(props) {
@@ -71,32 +82,53 @@ class RoomList extends React.Component {
     this.state = { roomsToReset: [], checked: false };
   }
   handleDefaultReset() {
+    //select all rooms for reset
     const def = this.props.default;
-    if (!this.state.checked) {
-      this.setState({ checked: true });
-      this.state.roomsToReset.map(room => {
-        this.props.resetToDefault(
-          room,
-          def.wakeTime,
-          def.sleepTime,
-          def.alarm.time,
-          def.alarm.soundId,
-          def.alarm.duration,
-          def.minCCT,
-          def.maxCCt,
-          def.minLevel,
-          def.maxLevel,
-          def.settingsResetTime,
-          def.scheduleMode
-        );
-      });
-      this.setState({ roomsToReset: [] });
-    } else {
-      this.setState({ checked: false });
-    }
+    this.props.rooms.map(room => {
+      // console.log(room.id);
+      this.props.resetToDefault(
+        room.id,
+        def.wakeTime,
+        def.sleepTime,
+        def.alarm.time,
+        def.alarm.soundId,
+        def.alarm.duration,
+        def.minCCT,
+        def.maxCCt,
+        def.minLevel,
+        def.maxLevel,
+        def.settingsResetTime,
+        def.scheduleMode
+      );
+    });
+
+    //INSTEAD Use button to confirm reset for selected
+    // const def = this.props.default;
+    // if (!this.state.checked) {
+    //   this.setState({ checked: true });
+    //   this.state.roomsToReset.map(room => {
+    //     this.props.resetToDefault(
+    //       room,
+    //       def.wakeTime,
+    //       def.sleepTime,
+    //       def.alarm.time,
+    //       def.alarm.soundId,
+    //       def.alarm.duration,
+    //       def.minCCT,
+    //       def.maxCCt,
+    //       def.minLevel,
+    //       def.maxLevel,
+    //       def.settingsResetTime,
+    //       def.scheduleMode
+    //     );
+    //   });
+    //   this.setState({ roomsToReset: [] });
+    // } else {
+    //   this.setState({ checked: false });
+    // }
   }
   render() {
-    console.log(this.state.roomsToReset);
+    // console.log(this.state.roomsToReset);
     return (
       <Wrapper>
         <Row>
@@ -109,23 +141,22 @@ class RoomList extends React.Component {
         </Row>
         <ListContainer>
           <Row>
-            <ListHeader>Room Number</ListHeader>
-            <ListHeader>Tablet ID</ListHeader>
-            <ListHeader>Tablet Status</ListHeader>
-            <ListHeader style={{ minWidth: 170 }}>
-              Wake Time | SleepTime
-            </ListHeader>
+            <ListHeader>Number</ListHeader>
+            <ListHeader>ID</ListHeader>
+            <ListHeader>Status</ListHeader>
+            <ListHeader>Wake Time</ListHeader>
+            <ListHeader>SleepTime</ListHeader>
             <ListHeader>Alarm</ListHeader>
             <ListHeader>Schedule?</ListHeader>
-            <ListHeader>Light Errors</ListHeader>
-            <ListHeader
+            <ListHeaderColumn>Light Errors</ListHeaderColumn>
+            <ListHeaderColumn
               style={{ flexDirection: "row", width: 140, flexWrap: "nowrap" }}
             >
               Reset to Default?
-            </ListHeader>
-            <Box onClick={this.handleDefaultReset.bind(this)}>
-              {this.state.checked ? "X" : null}
-            </Box>
+              <Box onClick={this.handleDefaultReset.bind(this)}>
+                {this.state.checked ? "X" : null}
+              </Box>
+            </ListHeaderColumn>
           </Row>
           {this.props.rooms.map(room => (
             <RoomRender

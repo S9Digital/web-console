@@ -24,8 +24,8 @@ import {
 
 const DEFAULT_STATE = {
   default: {
-    wakeTime: null,
-    sleepTime: null,
+    wakeTime: "6:00 am",
+    sleepTime: "10:00 pm",
     alarm: { time: null, soundId: "Music AB", duration: "60" },
     minCCT: "500",
     maxCCT: "2500",
@@ -175,7 +175,15 @@ const DEFAULT_STATE = {
         lastMotionMagnititude: null
       },
       bulbs: [
-        { id: 1, error: false, lastHeard: "12:00" },
+        {
+          id: 1,
+          counter: null,
+          allOn: false,
+          alarmGroup: false,
+          scheduleUpdated: "12:00",
+          error: false,
+          lastHeard: "12:00"
+        },
         { id: 2, error: true, lastHeard: "12:00" },
         { id: 3, error: false, lastHeard: "12:00" },
         { id: 4, error: false, lastHeard: "12:00" },
@@ -385,7 +393,6 @@ export default function reducer(state = DEFAULT_STATE, action) {
       rooms: state.rooms.map(room => {
         // console.log(room.id + "is the same as?" + action.id);
         if (room.id === action.id) {
-          console.log(room);
           return {
             ...room,
             id: action.id,
@@ -438,6 +445,7 @@ export default function reducer(state = DEFAULT_STATE, action) {
   // }
   if (action.type === CREATE_USER_SUCCESS) {
     //create user id
+    console.log("created user");
     return {
       ...state,
       users: [
