@@ -58,10 +58,6 @@ const ColumnItem = styled.div`
   padding-right: 20px;
   padding-left: 20px;
 `;
-const TitleText = styled.p`
-  font-size: 26px;
-  color: black;
-`;
 const OptionInput = styled.option`
   width: 200px;
   height: 50px;
@@ -69,6 +65,22 @@ const OptionInput = styled.option`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+const NavContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+`;
+const NavButton = styled.button`
+  width: 80px;
+  height: 30px;
+  margin: 5px;
+  background-color: #38352a;
+  color: white;
 `;
 
 class Defaults extends React.Component {
@@ -207,6 +219,8 @@ class Defaults extends React.Component {
                 <OptionInput value="60">60</OptionInput>
               </select>
             </ColumnItem>
+          </Column>
+          <Column>
             <ColumnItem>
               Min Tone: {this.state.minCCT}{" "}
               <select
@@ -315,8 +329,10 @@ class Defaults extends React.Component {
             </ColumnItem>
           </Column>
         </Row>
-        <button onClick={this.goBack.bind(this)}>cancel</button>
-        <button onClick={this.submit.bind(this)}>Submit</button>
+        <NavContainer>
+          <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
+          <NavButton onClick={this.submit.bind(this)}>Submit</NavButton>
+        </NavContainer>
       </Wrapper>
     );
   }

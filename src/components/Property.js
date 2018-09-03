@@ -105,21 +105,30 @@ class Property extends React.Component {
           <Container>
             <TileContainer>
               <TileText>
-                <Link to={`${this.props.history.location.pathname}/rooms`}>
+                <Link
+                  to={`${this.props.history.location.pathname}/rooms`}
+                  style={{ textDecoration: "none" }}
+                >
                   Room List
                 </Link>
               </TileText>
             </TileContainer>
             <TileContainer>
               <TileText>
-                <Link to={`${this.props.history.location.pathname}/default`}>
+                <Link
+                  to={`${this.props.history.location.pathname}/default`}
+                  style={{ textDecoration: "none" }}
+                >
                   Default Settings
                 </Link>
               </TileText>
             </TileContainer>
             <TileContainer>
               <TileText>
-                <Link to={`${this.props.history.location.pathname}/profile`}>
+                <Link
+                  to={`${this.props.history.location.pathname}/profile`}
+                  style={{ textDecoration: "none" }}
+                >
                   Profile | Admin
                 </Link>
               </TileText>
