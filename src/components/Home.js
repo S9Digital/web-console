@@ -22,6 +22,9 @@ const Logo = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+const Title = styled.p`
+  font-size: 36px;
+`;
 const LoginContainer = styled.div`
   flex: 1;
   display: flex;
@@ -39,8 +42,23 @@ const Login = styled.form`
   align-items: center;
 `;
 const TextInput = styled.input`
+  outline: none;
   width: 200px;
   height: 50px;
+  margin: 5px;
+  border-radius: 25px;
+  border-color: black;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const SelectInput = styled.select`
+  width: 200px;
+  height: 50px;
+  margin: 5px;
+  border-radius: 25px;
+  border-color: black;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -95,11 +113,16 @@ class Home extends Component {
     return (
       <Wrapper>
         <Logo>LOGO</Logo>
-        <p>Welcome to Ario Living Hopsitality Web Console</p>
+        <LoginContainer>
+          <Login>
+            <Title>Welcome to Ario Living</Title>
+            <Title>Hospitality Web Console</Title>
+          </Login>
+        </LoginContainer>
         <LoginContainer>
           <Login onSubmit={e => this.handleClick(e)}>
             <p>Property</p>
-            <select
+            <SelectInput
               name="/property"
               value={this.state.propertyId}
               onChange={e => this.changeProperty(e)}
@@ -107,14 +130,14 @@ class Home extends Component {
               {this.props.properties.map(property =>
                 this.renderPropertySelect(property)
               )}
-            </select>
+            </SelectInput>
             <TextInput
-              placeholder="username"
+              placeholder="  enter username"
               value={this.state.username}
               onChange={e => this.changeUsername(e)}
             />
             <TextInput
-              placeholder="password"
+              placeholder="  enter password"
               value={this.state.password}
               onChange={e => this.changePassword(e)}
             />
