@@ -76,6 +76,22 @@ const Box = styled.div`
   margin: 2px;
   margin-right: 10px;
 `;
+const NavContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+`;
+const NavButton = styled.button`
+  width: 80px;
+  height: 30px;
+  margin: 5px;
+  background-color: #38352a;
+  color: white;
+`;
 class RoomList extends React.Component {
   constructor(props) {
     super(props);
@@ -145,6 +161,10 @@ class RoomList extends React.Component {
     //   this.setState({ checked: false });
     // }
   }
+
+  goBack() {
+    this.props.history.goBack();
+  }
   render() {
     // console.log(this.state.roomsToReset);
     return (
@@ -200,6 +220,9 @@ class RoomList extends React.Component {
             />
           ))}
         </ListContainer>
+        <NavContainer>
+          <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
+        </NavContainer>
       </Wrapper>
     );
   }
