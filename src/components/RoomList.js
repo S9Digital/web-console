@@ -118,6 +118,7 @@ class RoomList extends React.Component {
   handleDefaultReset() {
     //select all rooms for reset
     const def = this.props.default;
+    alert("are you sure you want to reset all rooms?");
     this.props.rooms.map(room => {
       // console.log(room.id);
       this.props.resetToDefault(

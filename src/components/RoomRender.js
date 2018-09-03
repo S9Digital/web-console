@@ -129,6 +129,7 @@ class RoomRender extends React.Component {
     });
   }
   handleCheck(room) {
+    alert("are you sure you want to reset this room?");
     if (!this.state.checked) {
       this.props.clearPick(room);
       this.setState({ checked: false });
@@ -156,17 +157,7 @@ class RoomRender extends React.Component {
         <RowItem>{item.wakeTime ? item.wakeTime : "Off"}</RowItem>
         <RowItem>{item.sleepTime ? item.sleepTime : "Off"}</RowItem>
         <RowItem>{item.alarm.time ? "On" : "Off"}</RowItem>
-        <RowItem>
-          {item.scheduleMode ? (
-            <On>
-              <p style={{ margin: 5 }}>On</p>
-            </On>
-          ) : (
-            <Off>
-              <p style={{ margin: 5 }}>Off</p>
-            </Off>
-          )}
-        </RowItem>
+        <RowItem>{item.scheduleMode ? <On /> : <Off />}</RowItem>
         <BulbBox>{this.state.bulbError ? "Error" : "✓"}</BulbBox>
 
         <RowItem>
