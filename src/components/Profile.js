@@ -365,7 +365,9 @@ class Profile extends Component {
         <Header />
         {this.renderActionSelect()}
         {this.renderForm()}
-        <button onClick={this.goBack.bind(this)}>cancel</button>
+        <AccountContainer>
+          <button onClick={this.goBack.bind(this)}>cancel</button>
+        </AccountContainer>
       </Wrapper>
     );
   }

@@ -103,6 +103,23 @@ const Bulb = styled.p`
   justify-content: center;
   align-items: center;
 `;
+const NavContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+`;
+const NavButton = styled.button`
+  width: 80px;
+  height: 30px;
+  margin: 5px;
+  background-color: #38352a;
+  color: white;
+`;
+
 const CheckBox = styled.div`
   width: 20px;
   height: 20px;
@@ -279,6 +296,8 @@ class Room extends React.Component {
                 <OptionInput value="60">60</OptionInput>
               </select>
             </ColumnItem>
+          </Column>
+          <Column>
             <ColumnItem>
               Min Tone: {this.state.minCCT}{" "}
               <select
@@ -379,8 +398,10 @@ class Room extends React.Component {
             </BulbBox>
           </Column>
         </Row>
-        <button onClick={this.goBack.bind(this)}>cancel</button>
-        <button onClick={this.submit.bind(this)}>Submit</button>
+        <NavContainer>
+          <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
+          <NavButton onClick={this.submit.bind(this)}>Submit</NavButton>
+        </NavContainer>
       </Wrapper>
     );
   }
