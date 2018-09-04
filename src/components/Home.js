@@ -112,7 +112,12 @@ class Home extends Component {
   render() {
     return (
       <Wrapper>
-        <Logo>LOGO</Logo>
+        {/* <Logo>LOGO</Logo> */}
+        <img
+          style={{ width: 100, height: 100, margin: 10 }}
+          // src="../assets/mountain_background.jpg"
+          src={require("./ArioLogo.png")}
+        />
         <LoginContainer>
           <Login>
             <Title>Welcome to Ario Living</Title>

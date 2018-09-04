@@ -31,6 +31,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `;
+const TitleText = styled.p`
+  font-size: 26px;
+  color: black;
+  margin-right: 250px;
+`;
 const Row = styled.div`
   display: flex;
   flex: 1;
@@ -142,12 +147,12 @@ class Defaults extends React.Component {
   }
 
   render() {
-    console.log(this.props.defaults);
     return (
       <Wrapper>
         <Row>
           <Container>
             <Hotel />
+            <TitleText>Room List</TitleText>
           </Container>
         </Row>
         <Row>

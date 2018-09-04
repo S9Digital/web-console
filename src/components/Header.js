@@ -8,43 +8,30 @@ const Wrapper = styled.div`
   height: 120px;
   flex: 1;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  border-bottom: 1px solid black;
 `;
 const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-end;
 `;
-const Logo = styled.div`
-  width: 100px;
-  height: 75px;
-  border: 1px solid black;
-  flex: 1;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
+
 const TitleContainer = styled.div`
-  flex: 1;
+  flex: 3;
   display: flex;
-  width: 600px;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: center;
 `;
 const Title = styled.p`
-  font-size: 26px;
-  width: 267px;
+  font-size: 36px;
   display: flex;
   flex: 1;
-  justify-content: flex-start;
-  align-items: center;
   flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-end;
 `;
 const Divider = styled.p`
   font-size: 36px;
@@ -66,18 +53,23 @@ class Header extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Container>
-          <Logo>LOGO</Logo>
+        <Container style={{ alignItems: "flex-Start" }}>
+          <img
+            style={{ width: 80, height: 80, margin: 20 }}
+            // src="../assets/mountain_background.jpg"
+            src={require("./ArioLogo.png")}
+          />
         </Container>
         <TitleContainer>
           <Title>Healthy Living Console</Title>
-          <Divider>|</Divider>
-          <Title>Dashboard</Title>
+          {/* <Divider>|</Divider>
+          <Title>Dashboard</Title> */}
         </TitleContainer>
         <Container>
-          <Moment element={TimeText} format="dddd MMMM D, YYYY - H:mma z" />
+          <Moment element={TimeText} format="dddd MMMM D, YYYY" />
           {/* set up users to pull from list of users correctly */}
-          <TimeText>Welcome - {this.props.user}</TimeText>
+          <TimeText>Welcome - John Smith</TimeText>
+          {/* {this.props.user} */}
         </Container>
       </Wrapper>
     );

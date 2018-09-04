@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
+import Header from "./Header";
 import {
   BrowserRouter as Router,
   Link,
@@ -12,7 +13,7 @@ import {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh - 200px;
+  height: 100%;
   flex: 1;
   flex-direction: column;
   display: flex;
@@ -21,7 +22,7 @@ const Wrapper = styled.div`
 `;
 const Content = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100% - 300px;
   flex: 1;
   flex-direction: column;
   display: flex;
@@ -37,7 +38,6 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   width: 90%;
-  margin: 10px;
 `;
 const MetricsContainer = styled.div`
   flex: 1;
@@ -45,9 +45,6 @@ const MetricsContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 18%;
-  height: 200px;
-  margin: 10px;
 `;
 const TileContainer = styled.div`
   flex: 1;
@@ -71,12 +68,12 @@ class Property extends React.Component {
     this.state = {};
   }
   render() {
-    console.log(this.props.history.location);
     return (
       <Wrapper>
+        <Header />
         <Content>
+          <Hotel />
           <Container>
-            <Hotel />
             <MetricsContainer>
               <BoldText>Current Metrics | Analytics</BoldText>
               <ul>
@@ -135,7 +132,9 @@ class Property extends React.Component {
             </TileContainer>
           </Container>
           <BoldText>Questions or Need Help?</BoldText>
-          <p>Contact us at support@arioliving.com</p>
+          <p>
+            <a href=""> Contact us at support@arioliving.com</a>
+          </p>
         </Content>
       </Wrapper>
     );

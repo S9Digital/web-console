@@ -13,24 +13,24 @@ const MetricsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  width: 18%;
-  height: 200px;
-  margin: 10px;
+  flex-direction: row;
+  height: 50px;
+  min-width: 500px;
 `;
 
 const HotelContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  margin: 10px;
 `;
 const HotelInfo = styled.p`
   font-size: 18;
   color: black;
-  width: 150px;
-  margin-left: 10px;
+  margin-left: 15px;
+  flex-wrap: nowrap;
 `;
 
 const BoldText = styled.p`font-size: 20px; color: black: font-weight: bold;`;
@@ -47,7 +47,7 @@ class Hotel extends React.Component {
           <BoldText>Hotel:</BoldText>
           <HotelInfo>{this.props.hotel[0].name}</HotelInfo>
         </HotelContainer>
-        <HotelContainer>
+        <HotelContainer style={{ justifyContent: "flex-start" }}>
           <BoldText>Address:</BoldText>
           <HotelInfo>{this.props.hotel[0].location}</HotelInfo>
         </HotelContainer>
