@@ -1,1 +1,1 @@
-web console for managing accounts
+moved to Ario-Light monorepo
