@@ -10,14 +10,14 @@ import Property from "./components/Property";
 import RoomList from "./components/RoomList";
 import Room from "./components/Room";
 
-const Wrapper = styled.div`width: 100% height: 100%;`;
+const Wrapper = styled.div``;
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
-          <Wrapper>
+        <Wrapper>
+          <Router>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/property/:propertyId/profile" component={Profile} />
@@ -33,8 +33,8 @@ class App extends Component {
               <Route path="/property/:propertyId/rooms" component={RoomList} />
               <Route path="/property/:propertyId" component={Property} />
             </Switch>
-          </Wrapper>
-        </Router>
+          </Router>
+        </Wrapper>
       </Provider>
     );
   }

@@ -40,7 +40,7 @@ const Divider = styled.p`
 `;
 const TimeText = styled.p`
   font-size: 16;
-  color: black;
+  color: white;
   margin: 2.5px;
   flex-wrap: nowrap;
   width: 250px;

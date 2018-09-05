@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
+import Header from "./Header";
 import RoomRender from "./RoomRender";
 import CheckBox from "./CheckBox";
 import { setRoom } from "../actions/PropertyActions";
@@ -26,8 +27,8 @@ const Row = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  border: solid Black;
-  border-width: 0px 1px 1px 1px;
+  border: solid white;
+  border-width: 1px 1px 1px 1px;
   justify-content: center;
   width: 100%;
 `;
@@ -40,8 +41,8 @@ const ListContainer = styled.div`
   justify-content: flex-start;
 `;
 const TitleText = styled.p`
-  font-size: 26px;
-  color: black;
+  font-size: 32px;
+  color: white;
 `;
 const ListHeader = styled.li`
   display: flex;
@@ -67,9 +68,8 @@ const ListHeaderColumn = styled.li`
 const Box = styled.div`
   width: 20px;
   height: 20px;
-  border: 1px solid black;
+  border: 1px solid white;
   background-color: #888888;
-  box-shadow: 2px 2px rgba(14, 14, 14, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,6 +89,7 @@ const NavButton = styled.button`
   width: 80px;
   height: 30px;
   margin: 5px;
+  border-radius: 5px;
   background-color: #38352a;
   color: white;
 `;
@@ -170,14 +171,11 @@ class RoomList extends React.Component {
     // console.log(this.state.roomsToReset);
     return (
       <Wrapper>
-        <Row>
-          <Container>
-            <Hotel />
-          </Container>
-          <Container>
-            <TitleText>Room List</TitleText>
-          </Container>
-        </Row>
+        <Header />
+        <Container>
+          <TitleText>Room List</TitleText>
+        </Container>
+        <Hotel />
         <ListContainer>
           <Row>
             <ListHeader>Number</ListHeader>
@@ -222,7 +220,7 @@ class RoomList extends React.Component {
           ))}
         </ListContainer>
         <NavContainer>
-          <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
+          <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
         </NavContainer>
       </Wrapper>
     );

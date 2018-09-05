@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
+import Header from "./Header";
 import moment from "moment";
 import {
   BrowserRouter as Router,
@@ -32,15 +33,13 @@ const Container = styled.div`
   justify-content: center;
 `;
 const TitleText = styled.p`
-  font-size: 26px;
-  color: black;
-  margin-right: 250px;
+  font-size: 32px;
+  color: white;
 `;
 const Row = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  border: 1px solid Black;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -49,8 +48,8 @@ const Column = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   height: 100%;
 `;
 const ColumnItem = styled.div`
@@ -84,6 +83,7 @@ const NavButton = styled.button`
   width: 80px;
   height: 30px;
   margin: 5px;
+  border-radius: 5px;
   background-color: #38352a;
   color: white;
 `;
@@ -149,14 +149,13 @@ class Defaults extends React.Component {
   render() {
     return (
       <Wrapper>
+        <Header />
         <Row>
-          <Container>
-            <Hotel />
-            <TitleText>Room List</TitleText>
-          </Container>
+          <TitleText>Defaults</TitleText>
         </Row>
-        <Row>
-          <Column>
+        <Hotel />
+        <Row style={{ alignItems: "flex-start", margin: 15, width: 700 }}>
+          <Column style={{ marginLeft: 50 }}>
             <ColumnItem>
               Sleep Time: {this.state.sleepTime}
               <Datetime
@@ -225,7 +224,7 @@ class Defaults extends React.Component {
               </select>
             </ColumnItem>
           </Column>
-          <Column>
+          <Column style={{ marginLeft: 100 }}>
             <ColumnItem>
               Min Tone: {this.state.minCCT}{" "}
               <select
@@ -312,14 +311,39 @@ class Defaults extends React.Component {
             </ColumnItem>
             <ColumnItem>
               Schedule Mode On?{" "}
-              <button
-                style={{ marginLeft: 20, width: 50 }}
-                onClick={this.onClickSchedule.bind(this)}
-              >
-                {this.state.scheduleMode ? "Yes" : "No"}
-              </button>
+              {this.state.scheduleMode ? (
+                <button
+                  style={{
+                    marginLeft: 20,
+                    width: 50,
+                    height: 20,
+                    backgroundColor: "green",
+                    outline: "none",
+                    border: "none",
+                    borderRadius: 5
+                  }}
+                  onClick={this.onClickSchedule.bind(this)}
+                >
+                  Yes
+                </button>
+              ) : (
+                <button
+                  style={{
+                    marginLeft: 20,
+                    width: 50,
+                    height: 20,
+                    backgroundColor: "red",
+                    outline: "none",
+                    border: "none",
+                    borderRadius: 5
+                  }}
+                  onClick={this.onClickSchedule.bind(this)}
+                >
+                  No
+                </button>
+              )}
             </ColumnItem>
-            <ColumnItem>
+            {/* <ColumnItem>
               Settings Reset Time?: {this.state.settingsResetTime}{" "}
               <Datetime
                 dateFormat={false}
@@ -331,11 +355,11 @@ class Defaults extends React.Component {
                   });
                 }}
               />
-            </ColumnItem>
+            </ColumnItem> */}
           </Column>
         </Row>
         <NavContainer>
-          <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
+          <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
           <NavButton onClick={this.submit.bind(this)}>Submit</NavButton>
         </NavContainer>
       </Wrapper>

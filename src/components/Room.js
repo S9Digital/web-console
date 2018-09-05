@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
+import Header from "./Header";
 import moment from "moment";
 import {
   BrowserRouter as Router,
@@ -35,7 +36,6 @@ const Row = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  border: 1px solid Black;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -45,7 +45,8 @@ const Column = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  margin-left: 50px;
+  align-items: flex-start;
   height: 100%;
 `;
 const ColumnItem = styled.div`
@@ -59,8 +60,9 @@ const ColumnItem = styled.div`
   padding-left: 20px;
 `;
 const TitleText = styled.p`
-  font-size: 26px;
-  color: black;
+  font-size: 20px;
+  color: white;
+  margin: 15px;
 `;
 const OptionInput = styled.option`
   width: 200px;
@@ -76,9 +78,10 @@ const BulbBox = styled.div`
   flex-wrap: wrap;
   width: 300px;
   height: 300px;
+  border-radius: 5px;
   align-items: center;
   justify-content: center;
-  background-color: #38352a;
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 const BulbItem = styled.div`
   width: 50px;
@@ -95,6 +98,7 @@ const BulbItem = styled.div`
 `;
 const Bulb = styled.p`
   font-size: 8px;
+  font-weight: italic;
   color: black;
   cursor: default;
   display: flex;
@@ -113,21 +117,13 @@ const NavContainer = styled.div`
   justify-content: center;
 `;
 const NavButton = styled.button`
+  outline: none;
   width: 80px;
   height: 30px;
   margin: 5px;
+  border-radius: 5px;
   background-color: #38352a;
   color: white;
-`;
-
-const CheckBox = styled.div`
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
 `;
 
 class Room extends React.Component {
@@ -169,21 +165,23 @@ class Room extends React.Component {
     this.setState({ scheduleMode: !this.state.scheduleMode });
   }
   submit() {
-    this.props.updateRoom(
-      this.props.room[0].id,
-      this.state.sleepTime,
-      this.state.wakeTime,
-      this.state.alarmTime,
-      this.state.alarmSound,
-      this.state.alarmDuration,
-      this.state.minCCT,
-      this.state.maxCCT,
-      this.state.minLevel,
-      this.state.maxLevel,
-      this.state.settingsResetTime,
-      this.state.scheduleMode
-    );
-    this.props.history.goBack();
+    if (window.confirm("Are you sure you want to submit this?")) {
+      this.props.updateRoom(
+        this.props.room[0].id,
+        this.state.sleepTime,
+        this.state.wakeTime,
+        this.state.alarmTime,
+        this.state.alarmSound,
+        this.state.alarmDuration,
+        this.state.minCCT,
+        this.state.maxCCT,
+        this.state.minLevel,
+        this.state.maxLevel,
+        this.state.settingsResetTime,
+        this.state.scheduleMode
+      );
+      this.props.history.goBack();
+    }
   }
   goBack() {
     this.props.history.goBack();
@@ -203,28 +201,24 @@ class Room extends React.Component {
   render() {
     return (
       <Wrapper>
+        <Header />
+        <Hotel />
         <Row>
-          <Container>
-            <Column>
-              <TitleText>
-                Room: {this.props.room[0].number} | Tablet ID:{" "}
-                {this.props.room[0].id}
-              </TitleText>
-              <TitleText>
-                Tablet: {this.props.room[0].tablet.on ? "On" : "Off"} | Issues:{" "}
-                {this.props.room[0].hasIssue ? "Yes" : "No"}
-              </TitleText>
-
-              <TitleText>
-                Last Heard:{" "}
-                {this.props.room[0].tablet.lastHeard
-                  ? this.props.room[0].tablet.lastHeard
-                  : "N/A"}
-              </TitleText>
-            </Column>
-          </Container>
-          <Container>
-            <Hotel />
+          <Container style={{ marginBottom: 10 }}>
+            <TitleText>Room: {this.props.room[0].number}</TitleText>
+            <TitleText>Tablet ID: {this.props.room[0].id}</TitleText>
+            <TitleText>
+              Tablet: {this.props.room[0].tablet.on ? "On" : "Off"}
+            </TitleText>
+            <TitleText>
+              Issues: {this.props.room[0].hasIssue ? "Yes" : "No"}
+            </TitleText>
+            <TitleText>
+              Last Heard:{" "}
+              {this.props.room[0].tablet.lastHeard
+                ? this.props.room[0].tablet.lastHeard
+                : "N/A"}
+            </TitleText>
           </Container>
         </Row>
         <Row>
@@ -384,12 +378,37 @@ class Room extends React.Component {
             </ColumnItem>
             <ColumnItem>
               Schedule Mode On?{" "}
-              <button
-                style={{ marginLeft: 20, width: 50 }}
-                onClick={this.onClickSchedule.bind(this)}
-              >
-                {this.state.scheduleMode ? "Yes" : "No"}
-              </button>
+              {this.state.scheduleMode ? (
+                <button
+                  style={{
+                    marginLeft: 20,
+                    width: 50,
+                    height: 20,
+                    backgroundColor: "green",
+                    outline: "none",
+                    border: "none",
+                    borderRadius: 5
+                  }}
+                  onClick={this.onClickSchedule.bind(this)}
+                >
+                  Yes
+                </button>
+              ) : (
+                <button
+                  style={{
+                    marginLeft: 20,
+                    width: 50,
+                    height: 20,
+                    backgroundColor: "red",
+                    outline: "none",
+                    border: "none",
+                    borderRadius: 5
+                  }}
+                  onClick={this.onClickSchedule.bind(this)}
+                >
+                  No
+                </button>
+              )}
             </ColumnItem>
           </Column>
           <Column>
@@ -399,7 +418,7 @@ class Room extends React.Component {
           </Column>
         </Row>
         <NavContainer>
-          <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
+          <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
           <NavButton onClick={this.submit.bind(this)}>Submit</NavButton>
         </NavContainer>
       </Wrapper>

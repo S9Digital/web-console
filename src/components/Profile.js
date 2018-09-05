@@ -20,15 +20,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
-const Logo = styled.div`
-  width: 100px;
-  height: 75px;
-  border: 1px solid black;
-  flex: 1;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
 const AccountContainer = styled.div`
   flex: 1;
   display: flex;
@@ -38,7 +29,7 @@ const AccountContainer = styled.div`
 `;
 const Form = styled.form`
   width: 200px;
-  height: 300px;
+  height: 450px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -47,7 +38,7 @@ const Form = styled.form`
 `;
 const FormSmall = styled.form`
   width: 200px;
-  height: 150px;
+  height: 230px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -64,14 +55,21 @@ const ColumnItem = styled.div`
   height: 50px;
   padding-right: 20px;
   padding-left: 20px;
+  margin: 20px;
+`;
+const TitleText = styled.p`
+  margin: 10px;
+  font-size: 20;
+  color: white;
 `;
 const TextInput = styled.input`
   outline: none;
   width: 200px;
   height: 50px;
-  margin: 5px;
-  border-radius: 25px;
+  margin: 15px;
+  border-radius: 5px;
   border-color: black;
+  border: 1px solid black;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -110,6 +108,7 @@ const NavContainer = styled.div`
   flex-wrap: wrap;
   width: 300px;
   height: 50px;
+  margin: 20px;
   align-items: center;
   justify-content: center;
 `;
@@ -117,6 +116,7 @@ const NavButton = styled.button`
   width: 80px;
   height: 30px;
   margin: 5px;
+  border-radius: 5px;
   background-color: #38352a;
   color: white;
 `;
@@ -218,10 +218,10 @@ class Profile extends Component {
   renderActionSelect() {
     return (
       <ColumnItem>
-        Profile Action:
+        <p style={{ fontSize: 28 }}>Profile Action:</p>
         <select
           name="Profile Action"
-          style={{ marginLeft: 10 }}
+          style={{ marginLeft: 10, marginTop: 5 }}
           value={this.state.profileAction}
           onChange={this.changeAction.bind(this)}
         >
@@ -243,24 +243,24 @@ class Profile extends Component {
     if (this.state.profileAction === "createUser") {
       return (
         <AccountContainer>
-          Create User
+          <TitleText>Create User</TitleText>
           <Form onSubmit={e => this.submitNewUser(e)}>
             <TextInput
-              placeholder="username"
+              placeholder=" username"
               value={this.state.username}
               onChange={e => this.changeName(e)}
             />
             <TextInput
-              placeholder="password"
+              placeholder=" password"
               value={this.state.password}
               onChange={e => this.changePassword(e)}
             />
             <TextInput
-              placeholder="email"
+              placeholder=" email"
               value={this.state.email}
               onChange={e => this.changeEmail(e)}
             />
-            Admin?
+            <TitleText> Admin? </TitleText>
             <SelectInput
               name="Admin"
               value={this.state.isAdmin}
@@ -269,7 +269,7 @@ class Profile extends Component {
               <option value={true}>Yes</option>
               <option value={false}>No</option>
             </SelectInput>
-            Super Admin?
+            <TitleText> Super Admin? </TitleText>
             <SelectInput
               name="Super Admin"
               value={this.state.isSuperAdmin}
@@ -288,8 +288,8 @@ class Profile extends Component {
               <option value={false}>No</option>
             </select> */}
             <NavContainer>
+              <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
               <NavInput type="submit" value="submit" />
-              <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
             </NavContainer>
           </Form>
         </AccountContainer>
@@ -315,7 +315,7 @@ class Profile extends Component {
               value={this.state.email}
               onChange={e => this.changeEmail(e)}
             />
-            Admin?
+            <TitleText>Admin?</TitleText>
             <SelectInput
               name="Admin"
               value={this.state.isAdmin}
@@ -324,7 +324,7 @@ class Profile extends Component {
               <option value={true}>Yes</option>
               <option value={false}>No</option>
             </SelectInput>
-            Super Admin?
+            <TitleText>Super Admin?</TitleText>
             <SelectInput
               name="Super Admin"
               value={this.state.isSuperAdmin}
@@ -343,8 +343,8 @@ class Profile extends Component {
               <option value={false}>No</option>
             </select> */}
             <NavContainer>
+              <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
               <NavInput type="submit" value="submit" />
-              <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
             </NavContainer>
           </Form>
         </AccountContainer>
@@ -353,7 +353,7 @@ class Profile extends Component {
     if (this.state.profileAction === "createProperty") {
       return (
         <AccountContainer>
-          Create Property
+          <TitleText>Create Property</TitleText>
           <FormSmall onSubmit={e => this.submitNewProperty(e)}>
             <TextInput
               placeholder="hotel name"
@@ -381,8 +381,8 @@ class Profile extends Component {
               onChange={e => this.changeHotelEmail(e)}
             /> */}
             <NavContainer>
+              <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
               <NavInput type="submit" value="submit" />
-              <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
             </NavContainer>
           </FormSmall>
         </AccountContainer>
@@ -391,7 +391,7 @@ class Profile extends Component {
     if (this.state.profileAction === "editProperty") {
       return (
         <AccountContainer>
-          Edit Property
+          <TitleText> Edit Property</TitleText>
           <FormSmall onSubmit={e => this.submitPropertyUpdate(e)}>
             <TextInput
               placeholder="hotel name"
@@ -419,8 +419,8 @@ class Profile extends Component {
               onChange={e => this.changeHotelEmail(e)}
             /> */}
             <NavContainer>
+              <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
               <NavInput type="submit" value="submit" />
-              <NavButton onClick={this.goBack.bind(this)}>cancel</NavButton>
             </NavContainer>
           </FormSmall>
         </AccountContainer>

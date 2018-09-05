@@ -27,13 +27,13 @@ const HotelContainer = styled.div`
   margin: 10px;
 `;
 const HotelInfo = styled.p`
-  font-size: 18;
-  color: black;
+  font-size: 20px;
+  color: white;
   margin-left: 15px;
   flex-wrap: nowrap;
 `;
 
-const BoldText = styled.p`font-size: 20px; color: black: font-weight: bold;`;
+const BoldText = styled.p`font-size: 20px; color: white: font-weight: bold;`;
 
 class Hotel extends React.Component {
   constructor(props) {

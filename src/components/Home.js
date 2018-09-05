@@ -8,11 +8,15 @@ import {
   Switch,
   withRouter
 } from "react-router-dom";
-
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
+// const Overlay = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgba(0, 0, 0, 0.4);
+// `;
 const Logo = styled.div`
   width: 100px;
   height: 75px;
@@ -23,7 +27,8 @@ const Logo = styled.div`
   align-items: center;
 `;
 const Title = styled.p`
-  font-size: 36px;
+  font-size: 45px;
+  color: white;
 `;
 const LoginContainer = styled.div`
   flex: 1;
@@ -43,21 +48,29 @@ const Login = styled.form`
 `;
 const TextInput = styled.input`
   outline: none;
-  width: 200px;
+  width: 195px;
   height: 50px;
   margin: 5px;
-  border-radius: 25px;
-  border-color: black;
+  border: 1px solid black;
+  border-radius: 5px;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+const SubmitInput = styled.input`
+  width: 80px;
+  height: 30px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: #38352a;
+  color: white;
+`;
 const SelectInput = styled.select`
   width: 200px;
   height: 50px;
   margin: 5px;
-  border-radius: 25px;
+  border-radius: 5px;
   border-color: black;
   flex: 1;
   display: flex;
@@ -113,6 +126,7 @@ class Home extends Component {
     return (
       <Wrapper>
         {/* <Logo>LOGO</Logo> */}
+        {/* <Overlay> */}
         <img
           style={{ width: 100, height: 100, margin: 10 }}
           // src="../assets/mountain_background.jpg"
@@ -126,7 +140,7 @@ class Home extends Component {
         </LoginContainer>
         <LoginContainer>
           <Login onSubmit={e => this.handleClick(e)}>
-            <p>Property</p>
+            <p style={{ color: "white" }}>Property</p>
             <SelectInput
               name="/property"
               value={this.state.propertyId}
@@ -137,18 +151,19 @@ class Home extends Component {
               )}
             </SelectInput>
             <TextInput
-              placeholder="  enter username"
+              placeholder=" enter username"
               value={this.state.username}
               onChange={e => this.changeUsername(e)}
             />
             <TextInput
-              placeholder="  enter password"
+              placeholder=" enter password"
               value={this.state.password}
               onChange={e => this.changePassword(e)}
             />
-            <TextInput type="submit" value="submit" />
+            <SubmitInput type="submit" value="submit" />
           </Login>
         </LoginContainer>
+        {/* </Overlay> */}
       </Wrapper>
     );
   }

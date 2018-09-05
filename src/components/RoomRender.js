@@ -30,7 +30,7 @@ const Row = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  border: solid black;
+  border: solid white;
   border-width: 0px 1px 1px 1px;
   justify-content: center;
   align-items: center;
@@ -54,20 +54,6 @@ const BulbBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const BulbItem = styled.div`
-  width: 20px;
-  height: 20px;
-  margin: 1px;
-  border-radius: 25px;
-  background-color: #ffe972;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Bulb = styled.p`
-  font-size: 8px;
-  color: black;
-`;
 
 const On = styled.div`
   display: flex;
@@ -75,7 +61,6 @@ const On = styled.div`
   with: 20px;
   height: 20px;
   margin: 10px;
-  box-shadow: 2px 2px rgba(14, 14, 14, 0.8);
   border-radius: 25px;
   background-color: green;
   jusify-content: center;
@@ -88,7 +73,6 @@ const Off = styled.div`
   with: 20px;
   height: 20px;
   margin: 10px;
-  box-shadow: 2px 2px rgba(14, 14, 14, 0.7);
   flex-direction: row;
   border-radius: 25px;
   background-color: red;
@@ -99,9 +83,8 @@ const Off = styled.div`
 const Box = styled.div`
   width: 20px;
   height: 20px;
-  border: 1px solid black;
+  border: 1px solid white;
   background-color: #888888;
-  box-shadow: 2px 2px rgba(14, 14, 14, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,9 +131,11 @@ class RoomRender extends React.Component {
     return (
       <Row key={item.id}>
         <RowItem onClick={e => this.handleClick(e, item.id)}>
-          <a style={{ color: "blue", textDecoration: "underline" }}>
-            {item.number}
-          </a>
+          <div style={{ backgroundColor: "white", borderRadius: 5 }}>
+            <a style={{ color: "blue", textDecoration: "none", margin: 2 }}>
+              {item.number}
+            </a>
+          </div>
         </RowItem>
         <RowItem>{item.id}</RowItem>
         <RowItem>{item.tabletOn ? "On" : "Off"}</RowItem>

@@ -51,15 +51,15 @@ const TileContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   border-radius: 25px;
+  background-color: rgba(59, 157, 254, 0.5);
   width: 18%;
   height: 200px;
   margin: 10px;
 `;
 const TileText = styled.p`
-  font-size: 26px;
-  color: black;
+  font-size: 32px;
+  color: white;
 `;
 const BoldText = styled.p`font-size: 20px; color: black: font-weight: bold;`;
 class Property extends React.Component {
@@ -101,39 +101,61 @@ class Property extends React.Component {
           </Container>
           <Container>
             <TileContainer>
-              <TileText>
-                <Link
-                  to={`${this.props.history.location.pathname}/rooms`}
-                  style={{ textDecoration: "none" }}
-                >
-                  Room List
-                </Link>
-              </TileText>
+              <Link
+                to={`${this.props.history.location.pathname}/rooms`}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <TileText>Room List</TileText>
+              </Link>
+            </TileContainer>
+
+            <TileContainer>
+              <Link
+                to={`${this.props.history.location.pathname}/default`}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <TileText>Default Settings</TileText>
+              </Link>
             </TileContainer>
             <TileContainer>
-              <TileText>
-                <Link
-                  to={`${this.props.history.location.pathname}/default`}
-                  style={{ textDecoration: "none" }}
-                >
-                  Default Settings
-                </Link>
-              </TileText>
-            </TileContainer>
-            <TileContainer>
-              <TileText>
-                <Link
-                  to={`${this.props.history.location.pathname}/profile`}
-                  style={{ textDecoration: "none" }}
-                >
-                  Profile | Admin
-                </Link>
-              </TileText>
+              <Link
+                to={`${this.props.history.location.pathname}/profile`}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <TileText>Profile | Admin</TileText>
+              </Link>
             </TileContainer>
           </Container>
           <BoldText>Questions or Need Help?</BoldText>
           <p>
-            <a href=""> Contact us at support@arioliving.com</a>
+            <a href="" style={{ color: "white" }}>
+              {" "}
+              Contact us at support@arioliving.com
+            </a>
           </p>
         </Content>
       </Wrapper>
