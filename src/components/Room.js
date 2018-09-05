@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { injectGlobal } from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
 import Header from "./Header";
@@ -54,16 +54,19 @@ const ColumnItem = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   height: 50px;
-  padding-right: 20px;
-  padding-left: 20px;
 `;
 const TitleText = styled.p`
   font-size: 20px;
   color: white;
   margin: 15px;
+  display: flex;
+  flex-display: row;
+  align-items: center;
+  justifycontent: center;
 `;
+
 const OptionInput = styled.option`
   width: 200px;
   height: 50px;
@@ -124,6 +127,20 @@ const NavButton = styled.button`
   border-radius: 5px;
   background-color: #38352a;
   color: white;
+`;
+injectGlobal`
+  .pickerInput input{
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    height: 18px;
+  }
+  .pickerInput .rdtPicker {
+    background-color: rgba(72, 175, 255, 1);
+    width: 150px;
+    padding: 0;
+    border-radius: 5px;
+  }
 `;
 
 class Room extends React.Component {
@@ -207,12 +224,27 @@ class Room extends React.Component {
           <Container style={{ marginBottom: 10 }}>
             <TitleText>Room: {this.props.room[0].number}</TitleText>
             <TitleText>Tablet ID: {this.props.room[0].id}</TitleText>
-            <TitleText>
-              Tablet: {this.props.room[0].tablet.on ? "On" : "Off"}
-            </TitleText>
-            <TitleText>
-              Issues: {this.props.room[0].hasIssue ? "Yes" : "No"}
-            </TitleText>
+            {this.props.room[0].tablet.on ? (
+              <TitleText>
+                Tablet: <p style={{ color: "green", marginLeft: 5 }}>ON</p>
+              </TitleText>
+            ) : (
+              <TitleText>
+                {" "}
+                Tablet: <p style={{ color: "red", marginLeft: 5 }}>OFF</p>
+              </TitleText>
+            )}
+            {this.props.room[0].hasIssue ? (
+              <TitleText>
+                Issues: <p style={{ color: "green", marginLeft: 5 }}>NO</p>
+              </TitleText>
+            ) : (
+              <TitleText>
+                {" "}
+                Issues: <p style={{ color: "red", marginLeft: 5 }}>YES</p>
+              </TitleText>
+            )}
+
             <TitleText>
               Last Heard:{" "}
               {this.props.room[0].tablet.lastHeard
@@ -226,10 +258,12 @@ class Room extends React.Component {
             <ColumnItem>
               Sleep Time: {this.state.sleepTime}
               <Datetime
+                className={"pickerInput"}
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.sleepTime}
                 timeformat={"hh:mm a"}
+                //needs to get on blur working for text input
                 onChange={time => {
                   this.setState({
                     sleepTime: moment(time).format("hh:mm a")
@@ -240,6 +274,7 @@ class Room extends React.Component {
             <ColumnItem>
               Wake Time: {this.state.wakeTime}{" "}
               <Datetime
+                className={"pickerInput"}
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.wakeTime}
@@ -251,6 +286,7 @@ class Room extends React.Component {
             <ColumnItem>
               Alarm Time: {this.state.alarmTime}{" "}
               <Datetime
+                className={"pickerInput"}
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.alarmTime}
@@ -419,7 +455,12 @@ class Room extends React.Component {
         </Row>
         <NavContainer>
           <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
-          <NavButton onClick={this.submit.bind(this)}>Submit</NavButton>
+          <NavButton
+            style={{ backgroundColor: "rgba(72, 175, 255, 1)" }}
+            onClick={this.submit.bind(this)}
+          >
+            Submit
+          </NavButton>
         </NavContainer>
       </Wrapper>
     );

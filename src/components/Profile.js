@@ -75,6 +75,20 @@ const TextInput = styled.input`
   justify-content: center;
   align-items: center;
 `;
+const TextInput2 = styled.input`
+  outline: none;
+  width: 200px;
+  height: 30px;
+  margin-bottom: 50px;
+  margin: 15px;
+  border-radius: 5px;
+  border-color: black;
+  border: 1px solid black;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const OptionInput = styled.option`
   width: 200px;
   height: 50px;
@@ -124,7 +138,8 @@ const NavInput = styled.input`
   width: 80px;
   height: 30px;
   margin: 5px;
-  background-color: #38352a;
+  border-radius: 5px;
+  background-color: rgba(72, 175, 255, 1);
   color: white;
 `;
 
@@ -154,23 +169,27 @@ class Profile extends Component {
   }
   submitNewUser(e) {
     e.preventDefault();
-    this.props.createThisUser(
-      this.state.email,
-      this.state.name,
-      this.state.password,
-      this.state.isAdmin,
-      this.state.isSuperAdmin,
-      this.state.propertyId
-    );
-    this.props.history.goBack();
+    if (window.confirm("Are you sure you want to submit this?")) {
+      this.props.createThisUser(
+        this.state.email,
+        this.state.name,
+        this.state.password,
+        this.state.isAdmin,
+        this.state.isSuperAdmin,
+        this.state.propertyId
+      );
+      this.props.history.goBack();
+    }
   }
   submitNewProperty(e) {
     e.preventDefault();
-    this.props.createThisProperty(
-      this.state.hotelName,
-      this.state.hotelAddress
-    );
-    this.props.history.goBack();
+    if (window.confirm("Are you sure you want to submit this?")) {
+      this.props.createThisProperty(
+        this.state.hotelName,
+        this.state.hotelAddress
+      );
+      this.props.history.goBack();
+    }
   }
   changeAction(e) {
     this.setState({ profileAction: e.target.value });
@@ -211,7 +230,8 @@ class Profile extends Component {
   changeTwoFactor(e) {
     this.setState({ isTwoFactor: e.target.value });
   }
-  goBack() {
+  goBack(e) {
+    e.preventDefault();
     this.props.history.goBack();
   }
 
@@ -354,37 +374,38 @@ class Profile extends Component {
       return (
         <AccountContainer>
           <TitleText>Create Property</TitleText>
-          <FormSmall onSubmit={e => this.submitNewProperty(e)}>
-            <TextInput
+          <Form onSubmit={e => this.submitNewProperty(e)}>
+            <TextInput2
               placeholder="hotel name"
               value={this.state.hotelName}
               onChange={e => this.changeHotelName(e)}
             />
-            <TextInput
+            <TextInput2
               placeholder="hotel address"
               value={this.state.hotelAddress}
               onChange={e => this.changeHotelAddress(e)}
             />
-            {/* <TextInput
+            <TextInput2
               placeholder="hotel phone (main)"
               value={this.state.phone}
               onChange={e => this.changePhone(e)}
             />
-            <TextInput
+            <TextInput2
               placeholder="hotel phone (other)"
               value={this.state.phone}
               onChange={e => this.changePhone2(e)}
             />
-            <TextInput
+            <TextInput2
               placeholder="hotel email"
               value={this.state.hotelEmail}
               onChange={e => this.changeHotelEmail(e)}
-            /> */}
+              style={{ marginBottom: 50 }}
+            />
             <NavContainer>
               <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
               <NavInput type="submit" value="submit" />
             </NavContainer>
-          </FormSmall>
+          </Form>
         </AccountContainer>
       );
     }
@@ -392,37 +413,37 @@ class Profile extends Component {
       return (
         <AccountContainer>
           <TitleText> Edit Property</TitleText>
-          <FormSmall onSubmit={e => this.submitPropertyUpdate(e)}>
-            <TextInput
+          <Form onSubmit={e => this.submitPropertyUpdate(e)}>
+            <TextInput2
               placeholder="hotel name"
               value={this.state.hotelName}
               onChange={e => this.changeHotelName(e)}
             />
-            <TextInput
+            <TextInput2
               placeholder="hotel address"
               value={this.state.hotelAddress}
               onChange={e => this.changeHotelAddress(e)}
             />
-            {/* <TextInput
+            <TextInput2
               placeholder="hotel phone (main)"
               value={this.state.phone}
               onChange={e => this.changePhone(e)}
             />
-            <TextInput
+            <TextInput2
               placeholder="hotel phone (other)"
               value={this.state.phone}
               onChange={e => this.changePhone2(e)}
             />
-            <TextInput
+            <TextInput2
               placeholder="hotel email"
               value={this.state.hotelEmail}
               onChange={e => this.changeHotelEmail(e)}
-            /> */}
+            />
             <NavContainer>
               <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
               <NavInput type="submit" value="submit" />
             </NavContainer>
-          </FormSmall>
+          </Form>
         </AccountContainer>
       );
     }

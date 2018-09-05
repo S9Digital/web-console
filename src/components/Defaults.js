@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { injectGlobal } from "styled-components";
 import { connect } from "react-redux";
 import Hotel from "./Hotel";
 import Header from "./Header";
@@ -50,6 +50,7 @@ const Column = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  flex-wrap: nowrap;
   height: 100%;
 `;
 const ColumnItem = styled.div`
@@ -57,10 +58,9 @@ const ColumnItem = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   height: 50px;
-  padding-right: 20px;
-  padding-left: 20px;
+  min-width: 300px;
 `;
 const OptionInput = styled.option`
   width: 200px;
@@ -86,6 +86,20 @@ const NavButton = styled.button`
   border-radius: 5px;
   background-color: #38352a;
   color: white;
+`;
+injectGlobal`
+  .pickerInput input{
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    height: 18px;
+  }
+  .pickerInput .rdtPicker {
+    background-color: rgba(72, 175, 255, 1);
+    width: 150px;
+    padding: 0;
+    border-radius: 5px;
+  }
 `;
 
 class Defaults extends React.Component {
@@ -127,20 +141,22 @@ class Defaults extends React.Component {
     this.setState({ scheduleMode: !this.state.scheduleMode });
   }
   submit() {
-    this.props.setNewDefault(
-      this.state.wakeTime,
-      this.state.sleepTime,
-      this.state.alarmTime,
-      this.state.alarmSound,
-      this.state.alarmDuration,
-      this.state.minCCT,
-      this.state.maxCCT,
-      this.state.minLevel,
-      this.state.maxLevel,
-      this.state.settingsResetTime,
-      this.state.scheduleMode
-    );
-    this.props.history.goBack();
+    if (window.confirm("Are you sure you want to submit this?")) {
+      this.props.setNewDefault(
+        this.state.wakeTime,
+        this.state.sleepTime,
+        this.state.alarmTime,
+        this.state.alarmSound,
+        this.state.alarmDuration,
+        this.state.minCCT,
+        this.state.maxCCT,
+        this.state.minLevel,
+        this.state.maxLevel,
+        this.state.settingsResetTime,
+        this.state.scheduleMode
+      );
+      this.props.history.goBack();
+    }
   }
   goBack() {
     this.props.history.goBack();
@@ -151,7 +167,7 @@ class Defaults extends React.Component {
       <Wrapper>
         <Header />
         <Row>
-          <TitleText>Defaults</TitleText>
+          <TitleText>Defaults Settings</TitleText>
         </Row>
         <Hotel />
         <Row style={{ alignItems: "flex-start", margin: 15, width: 700 }}>
@@ -159,6 +175,7 @@ class Defaults extends React.Component {
             <ColumnItem>
               Sleep Time: {this.state.sleepTime}
               <Datetime
+                className={"pickerInput"}
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.sleepTime}
@@ -173,6 +190,7 @@ class Defaults extends React.Component {
             <ColumnItem>
               Wake Time: {this.state.wakeTime}{" "}
               <Datetime
+                className={"pickerInput"}
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.wakeTime}
@@ -184,6 +202,7 @@ class Defaults extends React.Component {
             <ColumnItem>
               Alarm Time: {this.state.alarmTime}{" "}
               <Datetime
+                className={"pickerInput"}
                 dateFormat={false}
                 closeOnSelect={true}
                 value={this.state.alarmTime}
@@ -360,7 +379,12 @@ class Defaults extends React.Component {
         </Row>
         <NavContainer>
           <NavButton onClick={this.goBack.bind(this)}>back</NavButton>
-          <NavButton onClick={this.submit.bind(this)}>Submit</NavButton>
+          <NavButton
+            style={{ backgroundColor: "rgba(72, 175, 255, 1)" }}
+            onClick={this.submit.bind(this)}
+          >
+            Submit
+          </NavButton>
         </NavContainer>
       </Wrapper>
     );

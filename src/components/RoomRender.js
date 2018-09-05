@@ -112,7 +112,6 @@ class RoomRender extends React.Component {
     });
   }
   handleCheck(room) {
-    alert("are you sure you want to reset this room?");
     if (!this.state.checked) {
       this.props.clearPick(room);
       this.setState({ checked: false });
@@ -131,8 +130,21 @@ class RoomRender extends React.Component {
     return (
       <Row key={item.id}>
         <RowItem onClick={e => this.handleClick(e, item.id)}>
-          <div style={{ backgroundColor: "white", borderRadius: 5 }}>
-            <a style={{ color: "blue", textDecoration: "none", margin: 2 }}>
+          <div
+            style={{
+              backgroundColor: "white",
+              borderRadius: 5,
+              borderColor: "rgba(72, 175, 255, 0.83)",
+              borderWidth: 1
+            }}
+          >
+            <a
+              style={{
+                color: "rgba(72, 175, 255, 0.83)",
+                textDecoration: "none",
+                margin: 10
+              }}
+            >
               {item.number}
             </a>
           </div>

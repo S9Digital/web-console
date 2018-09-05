@@ -17,6 +17,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
+  min-width: 250px;
 `;
 
 const TitleContainer = styled.div`

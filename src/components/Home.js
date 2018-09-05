@@ -12,23 +12,20 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
-// const Overlay = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   background-color: rgba(0, 0, 0, 0.4);
-// `;
-const Logo = styled.div`
-  width: 100px;
-  height: 75px;
-  border: 1px solid black;
-  flex: 1;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
+
 const Title = styled.p`
   font-size: 45px;
   color: white;
+  margin: 20px;
+`;
+const TitleContainer = styled.div`
+  width: 200px;
+  height: 100px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const LoginContainer = styled.div`
   flex: 1;
@@ -39,7 +36,7 @@ const LoginContainer = styled.div`
 `;
 const Login = styled.form`
   width: 200px;
-  height: 200px;
+  height: 130px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -125,22 +122,20 @@ class Home extends Component {
   render() {
     return (
       <Wrapper>
-        {/* <Logo>LOGO</Logo> */}
-        {/* <Overlay> */}
         <img
           style={{ width: 100, height: 100, margin: 10 }}
           // src="../assets/mountain_background.jpg"
           src={require("./ArioLogo.png")}
         />
-        <LoginContainer>
-          <Login>
+        <LoginContainer style={{ marginBottom: 150 }}>
+          <TitleContainer>
             <Title>Welcome to Ario Living</Title>
             <Title>Hospitality Web Console</Title>
-          </Login>
+          </TitleContainer>
         </LoginContainer>
         <LoginContainer>
           <Login onSubmit={e => this.handleClick(e)}>
-            <p style={{ color: "white" }}>Property</p>
+            {/* <p style={{ color: "white" }}>Property</p>
             <SelectInput
               name="/property"
               value={this.state.propertyId}
@@ -149,7 +144,7 @@ class Home extends Component {
               {this.props.properties.map(property =>
                 this.renderPropertySelect(property)
               )}
-            </SelectInput>
+            </SelectInput> */}
             <TextInput
               placeholder=" enter username"
               value={this.state.username}
@@ -160,10 +155,13 @@ class Home extends Component {
               value={this.state.password}
               onChange={e => this.changePassword(e)}
             />
-            <SubmitInput type="submit" value="submit" />
+            <SubmitInput
+              type="submit"
+              value="submit"
+              style={{ marginTop: 10 }}
+            />
           </Login>
         </LoginContainer>
-        {/* </Overlay> */}
       </Wrapper>
     );
   }

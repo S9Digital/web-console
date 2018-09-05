@@ -37,6 +37,7 @@ const ListContainer = styled.div`
   flex: 1;
   flex-direction: column;
   width: 80%;
+  background-color: rgba(0, 0, 0, 0.3);
   align-items: flex-start;
   justify-content: flex-start;
 `;
@@ -101,29 +102,9 @@ class RoomList extends React.Component {
   handleSingleDefaultReset(room) {
     //select all rooms for reset
     const def = this.props.default;
-    this.props.resetToDefault(
-      room,
-      def.wakeTime,
-      def.sleepTime,
-      def.alarm.time,
-      def.alarm.soundId,
-      def.alarm.duration,
-      def.minCCT,
-      def.maxCCt,
-      def.minLevel,
-      def.maxLevel,
-      def.settingsResetTime,
-      def.scheduleMode
-    );
-  }
-  handleDefaultReset() {
-    //select all rooms for reset
-    const def = this.props.default;
-    alert("are you sure you want to reset all rooms?");
-    this.props.rooms.map(room => {
-      // console.log(room.id);
+    if (window.confirm("are you sure you want to reset this room?")) {
       this.props.resetToDefault(
-        room.id,
+        room,
         def.wakeTime,
         def.sleepTime,
         def.alarm.time,
@@ -136,8 +117,30 @@ class RoomList extends React.Component {
         def.settingsResetTime,
         def.scheduleMode
       );
-    });
-
+    }
+  }
+  handleDefaultReset() {
+    //select all rooms for reset
+    const def = this.props.default;
+    if (window.confirm("are you sure you want to reset all rooms?")) {
+      this.props.rooms.map(room => {
+        // console.log(room.id);
+        this.props.resetToDefault(
+          room.id,
+          def.wakeTime,
+          def.sleepTime,
+          def.alarm.time,
+          def.alarm.soundId,
+          def.alarm.duration,
+          def.minCCT,
+          def.maxCCt,
+          def.minLevel,
+          def.maxLevel,
+          def.settingsResetTime,
+          def.scheduleMode
+        );
+      });
+    }
     //INSTEAD Use button to confirm reset for selected
     // const def = this.props.default;
     // if (!this.state.checked) {
@@ -173,7 +176,7 @@ class RoomList extends React.Component {
       <Wrapper>
         <Header />
         <Container>
-          <TitleText>Room List</TitleText>
+          <TitleText>Room Settings</TitleText>
         </Container>
         <Hotel />
         <ListContainer>
